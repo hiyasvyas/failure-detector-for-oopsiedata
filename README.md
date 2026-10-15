@@ -9,7 +9,7 @@ This repo follows `proposal/project_proposal.tex`. The goal is to name the pictu
 We took a look at OopsieData v0.1.
 The success mark is inside each episode file at `episode_annotations/<operator name>/success`. `1.0` means the attempt worked. `0.0` means it failed. The labs wrote those marks. The file does not say which picture the failure started on.
 
-We took 2 tasks randomly to explore and run R3M on:
+We chose 2 tasks that are different skills, on different robots, and both already have successes and failures:
 
 | Task | Episodes | Successes | Failures | What we use |
 | --- | --- | --- | --- | --- |
