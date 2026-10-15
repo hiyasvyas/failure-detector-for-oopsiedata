@@ -1,0 +1,58 @@
+Week 2 loader check
+Indexed episodes: 400
+open_oven: 200 episodes, labels {'success': 52, 'failure': 148}, missing videos 0, sessions 2, train 100, test 100
+stack_cups: 200 episodes, labels {'failure': 126, 'success': 74}, missing videos 0, sessions 16, train 152, test 48
+Test sessions:
+  open_oven: paired_2026-06-20-11-59-03
+  stack_cups: speeding-stack-pack-cups-dp-episodes, stack-unstack-bspline-1-2-act-2-episodes, stack-unstack-bspline-1-2-dp-4x-2-episodes
+Cup failures: 126. Notes say pending human review: 126.
+Cup ids containing -fail-: 126. Of those, labeled failure: 126.
+
+Early vs late picture difference for matched pairs (0-255 average).
+Early is the first 3 of the 16 pictures. Late is the last 3.
+oven pair 0 early 4.7 late 9.8
+oven pair 1 early 5.9 late 9.9
+oven pair 2 early 7.4 late 8.9
+oven pair 8 early 4.8 late 11.0
+oven pair 9 early 5.1 late 6.4
+oven pair 11 early 5.0 late 14.2
+oven pair 20 early 6.1 late 9.5
+cups speeding-stack-pack-cups-dp-bspline-1x-episodes early 10.0 late 25.1
+cups speeding-stack-pack-cups-dp-episodes early 5.4 late 17.6
+cups stack-unstack-bspline-1-2-act-2-episodes early 11.9 late 22.0
+cups stack-unstack-bspline-1-2-act-2x-2-episodes early 6.6 late 21.6
+cups stack-unstack-bspline-1-2-act-bspline-1x-episode early 11.5 late 24.7
+cups stack-unstack-bspline-1-2-dp-2-episodes early 11.3 late 14.1
+cups stack-unstack-bspline-1-2-dp-2x-episodes early 11.1 late 24.8
+
+Watched episodes
+01 open_oven success session=paired_2026-05-22-18-14-02 operator=LN frames=103 first_last=0..102
+02 open_oven failure session=paired_2026-05-22-18-14-02 operator=LN frames=400 first_last=0..399
+03 open_oven success session=paired_2026-05-22-18-14-02 operator=LN frames=125 first_last=0..124
+04 open_oven failure session=paired_2026-05-22-18-14-02 operator=LN frames=400 first_last=0..399
+05 open_oven success session=paired_2026-05-22-18-14-02 operator=LN frames=134 first_last=0..133
+06 open_oven failure session=paired_2026-05-22-18-14-02 operator=LN frames=400 first_last=0..399
+07 open_oven success session=paired_2026-05-22-18-14-02 operator=LN frames=101 first_last=0..100
+08 open_oven failure session=paired_2026-05-22-18-14-02 operator=LN frames=400 first_last=0..399
+09 open_oven success session=paired_2026-06-20-11-59-03 operator=LN frames=77 first_last=0..76
+10 open_oven failure session=paired_2026-06-20-11-59-03 operator=LN frames=400 first_last=0..399
+11 open_oven success session=paired_2026-06-20-11-59-03 operator=LN frames=249 first_last=0..248
+12 open_oven failure session=paired_2026-06-20-11-59-03 operator=LN frames=400 first_last=0..399
+13 open_oven success session=paired_2026-06-20-11-59-03 operator=LN frames=377 first_last=0..376
+14 open_oven failure session=paired_2026-06-20-11-59-03 operator=LN frames=400 first_last=0..399
+15 open_oven success session=paired_2026-05-22-18-14-02 operator=LN frames=90 first_last=0..89
+16 stack_cups success session=speeding-stack-pack-cups-dp-bspline-1x-episodes operator=HXS frames=539 first_last=0..538
+17 stack_cups failure session=speeding-stack-pack-cups-dp-bspline-1x-episodes operator=imported_source_label frames=305 first_last=0..304
+18 stack_cups success session=speeding-stack-pack-cups-dp-episodes operator=HXS frames=208 first_last=0..207
+19 stack_cups failure session=speeding-stack-pack-cups-dp-episodes operator=imported_source_label frames=201 first_last=0..200
+20 stack_cups success session=stack-unstack-bspline-1-2-act-2-episodes operator=HXS frames=213 first_last=0..212
+21 stack_cups failure session=stack-unstack-bspline-1-2-act-2-episodes operator=imported_source_label frames=110 first_last=0..109
+22 stack_cups success session=stack-unstack-bspline-1-2-act-2x-2-episodes operator=HXS frames=310 first_last=0..309
+23 stack_cups failure session=stack-unstack-bspline-1-2-act-2x-2-episodes operator=imported_source_label frames=255 first_last=0..254
+24 stack_cups success session=stack-unstack-bspline-1-2-act-bspline-1x-episodes operator=HXS frames=521 first_last=0..520
+25 stack_cups failure session=stack-unstack-bspline-1-2-act-bspline-1x-episodes operator=imported_source_label frames=327 first_last=0..326
+26 stack_cups success session=stack-unstack-bspline-1-2-dp-2-episodes operator=HXS frames=223 first_last=0..222
+27 stack_cups failure session=stack-unstack-bspline-1-2-dp-2-episodes operator=imported_source_label frames=147 first_last=0..146
+28 stack_cups success session=stack-unstack-bspline-1-2-dp-2x-episodes operator=HXS frames=332 first_last=0..331
+29 stack_cups failure session=stack-unstack-bspline-1-2-dp-2x-episodes operator=imported_source_label frames=189 first_last=0..188
+30 stack_cups success session=speeding-stack-pack-cups-dp-episodes operator=HXS frames=222 first_last=0..221

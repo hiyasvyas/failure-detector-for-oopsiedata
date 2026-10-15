@@ -23,7 +23,7 @@ R3M is installed from https://github.com/facebookresearch/r3m. The weights are `
 Two R3M runs are in this repo:
 
 - `week1/r3m_one_frame.pt` is the first run. One picture from a 13-frame oven clip. That clip is too short to be an experiment task. The file holds one vector of 2,048 numbers.
-- `week1/r3m_two_tasks.pt` is the second run, on the two real tasks. Four attempts: one oven success, one oven failure, one cup success, one cup failure. The script counted the pictures in each video, kept 16 pictures spread from the first to the last, and saved one vector per picture. Each of the four blocks has shape 16 ├ù 2048. The other 396 attempts have not been through R3M.
+- `week1/r3m_two_tasks.pt` is the second run, on the two real tasks. Four attempts: one oven success, one oven failure, one cup success, one cup failure. The script counted the pictures in each video, kept 16 pictures spread from the first to the last, and saved one vector per picture. Each of the four blocks has shape 16 by 2048. The other 396 attempts have not been through R3M.
 
 The script that made the second file is `week1/run_r3m_two_tasks.py`. To look at the saved numbers:
 
@@ -45,6 +45,11 @@ Robometer's code was cloned from https://github.com/robometer/robometer. It's no
 | `week1/run_r3m_two_tasks.py` | How the four real attempts were read and embedded |
 | `week1/r3m_two_tasks.pt` | Four attempts, 16 vectors each |
 | `download_data.py` | Downloads the WebVisualizer dataset into `data/` after `hf auth login`. That folder is gitignored |
+| `week2/loader.py` | Reads the success mark and returns 16 frames from the main camera |
+| `week2/run_week2.py` | Ran that loader on 30 attempts and saved the pictures |
+| `week2/episode_index.csv` | All 400 episodes, with the label, session, and train or test split |
+| `week2/week2_report.txt` | The counts and the early-versus-late check |
+| `week2/watch.html` | The 30 attempts, start, middle, and end. Open the pictures in `week2/frames` |
 
 ## Setup for download_data.py
 
@@ -56,8 +61,10 @@ hf auth login
 python download_data.py
 ```
 
-## What is next
+## Week 2
 
-Watch about 15 oven attempts and about 15 cup attempts, main camera only. Check that a success and a failure start on the same kind of scene and diverge where the attempt goes wrong. Spot-check cup failures, because those marks came from `imported_source_label` and the successes came from operator `HXS`. Then write the loader that returns 16 evenly spaced frames and the existing success mark for every episode.
+The loader is `week2/loader.py`. It reads the success mark already in the episode file and keeps 16 pictures from the main camera, spread from the first picture to the last. We ran it on 15 oven attempts and 15 cup attempts. A success and a failure of the oven start on the same table. The success ends with the door open. The failure ends with the door still shut. Cup failures say "pending human review" in the file, and the mark matches the "-fail-" in the filename. The mistake shows up in the middle of the cup video. The last frame often looks normal again because the arms go home.
+
+## What is next
 
 The full R3M cache, Robometer inference, and the four heads belong on TACC. We still need to learn how to use it and TACC and when to move this work off the laptop. Failure onset times are not in the files we opened. If we need timing, two people need to later mark about 40 failed videos, with 10 marked by both.
