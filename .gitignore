@@ -11,3 +11,4 @@ manifest.csv
 .env
 data/
 __pycache__/
+week3/*.pt

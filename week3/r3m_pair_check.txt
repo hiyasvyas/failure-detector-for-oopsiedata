@@ -1,0 +1,26 @@
+R3M distance between paired attempts (1 - cosine similarity, 0 means identical).
+Early = first 3 of the 16 pictures. Late = last 3.
+
+== raw R3M vectors
+open_oven
+  success vs failure  32 pairs  early 0.001  late 0.003  late > early in 84% of pairs
+    by picture: 0.002 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.002 0.003 0.003
+  success vs success  26 pairs  early 0.005  late 0.004  late > early in 69% of pairs
+    by picture: 0.005 0.004 0.004 0.004 0.004 0.004 0.004 0.004 0.004 0.004 0.004 0.004 0.005 0.005 0.004 0.004
+stack_cups
+  success vs failure  50 pairs  early 0.006  late 0.009  late > early in 68% of pairs
+    by picture: 0.000 0.006 0.011 0.004 0.004 0.003 0.003 0.004 0.004 0.006 0.003 0.004 0.003 0.004 0.007 0.016
+  success vs success  35 pairs  early 0.002  late 0.003  late > early in 71% of pairs
+    by picture: 0.000 0.005 0.002 0.002 0.002 0.002 0.003 0.002 0.003 0.004 0.002 0.001 0.002 0.003 0.006 0.002
+
+== task average subtracted
+open_oven
+  success vs failure  32 pairs  early 0.142  late 0.326  late > early in 88% of pairs
+    by picture: 0.159 0.126 0.141 0.132 0.105 0.087 0.084 0.091 0.107 0.101 0.116 0.140 0.189 0.266 0.339 0.372
+  success vs success  26 pairs  early 0.574  late 0.521  late > early in 38% of pairs
+    by picture: 0.574 0.575 0.573 0.579 0.574 0.569 0.559 0.574 0.567 0.517 0.546 0.580 0.621 0.626 0.511 0.425
+stack_cups
+  success vs failure  50 pairs  early 0.365  late 0.874  late > early in 88% of pairs
+    by picture: 0.003 0.137 0.953 0.543 0.771 0.588 0.538 0.604 0.690 0.767 0.561 0.559 0.614 0.622 0.843 1.157
+  success vs success  35 pairs  early 0.164  late 0.409  late > early in 89% of pairs
+    by picture: 0.003 0.112 0.378 0.414 0.258 0.297 0.421 0.350 0.440 0.530 0.291 0.201 0.389 0.435 0.718 0.073
