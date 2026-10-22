@@ -8,7 +8,9 @@ A few successes sit at the top so you can see what a finished attempt looks like
 
 Run:   py -3.12 week3/make_label_check.py
 Open:  week3/label_check/cups_label_check.html in a browser
-Click an answer for each attempt, then "Download results" saves a CSV.
+Click an answer for each attempt, type your name, then "Download results" saves
+cups_label_check_<name>.csv. To share the page, zip the whole label_check folder
+(the page needs its pictures/ folder next to it).
 """
 
 import argparse
@@ -34,8 +36,13 @@ label { margin-right: 16px; }
 For each failure, pick whether it really looks failed. Look at the middle and the end:
 a success ends with the cups stacked and packed. Your answers stay in this browser
 until you press "Download results".</p>
-<div class="bar"><span id="count">0</span> of %(n)d checked
-<button onclick="download()">Download results (CSV)</button></div>
+<p>If three of us split the work: the first person checks Failures 1 to 42, the second 43 to 84,
+and the third 85 to 126. Type your name in the box at the top before you download, and send
+the CSV to Hiya.</p>
+<div class="bar">Your name: <input id="name" type="text" size="12">
+&nbsp; <span id="count">0</span> of %(n)d checked
+<button onclick="download()">Download results (CSV)</button>
+<span id="name-error" style="color:#b00020;font-size:13px"></span></div>
 <h2>What a success looks like (%(n_ref)d examples)</h2>
 """
 
@@ -67,16 +74,25 @@ document.querySelectorAll(".item.failure").forEach(function (item) {
     saved[id] = saved[id] || {}; saved[id].note = note.value; store();
   });
 });
+var nameBox = document.getElementById("name");
+try { nameBox.value = localStorage.getItem(KEY + "-name") || ""; } catch (e) {}
+nameBox.addEventListener("input", function () {
+  document.getElementById("name-error").textContent = "";
+  try { localStorage.setItem(KEY + "-name", nameBox.value); } catch (e) {}
+});
 function download() {
-  var lines = ["episode_id,session_id,answer,note"];
+  // Each person's file gets their name, so several files can sit in week3/label_check/ together.
+  var name = nameBox.value.trim().replace(/[^A-Za-z0-9_-]/g, "");
+  if (!name) { document.getElementById("name-error").textContent = "Type your name first."; return; }
+  var lines = ["episode_id,session_id,answer,note,checked_by"];
   document.querySelectorAll(".item.failure").forEach(function (item) {
     var entry = saved[item.dataset.id] || {};
     var note = (entry.note || "").replace(/"/g, '""');
-    lines.push([item.dataset.id, item.dataset.session, entry.answer || "", '"' + note + '"'].join(","));
+    lines.push([item.dataset.id, item.dataset.session, entry.answer || "", '"' + note + '"', name].join(","));
   });
   var link = document.createElement("a");
   link.href = URL.createObjectURL(new Blob([lines.join("\\n") + "\\n"], {type: "text/csv"}));
-  link.download = "cups_label_check.csv";
+  link.download = "cups_label_check_" + name + ".csv";
   link.click();
 }
 refresh();

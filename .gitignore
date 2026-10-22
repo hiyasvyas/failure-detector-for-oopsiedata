@@ -14,3 +14,4 @@ __pycache__/
 week3/*.pt
 week3/label_check/pictures/
 week3/onset/sheets/
+week3/share/
