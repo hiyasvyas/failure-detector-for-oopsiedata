@@ -2,6 +2,21 @@
 
 Claas said to start running experiments and send him a status update, so this week is about getting first numbers, not polishing the plan. The write-up comes at the end of the week, once there are results to report.
 
+## What's left (updated Oct 21)
+
+All the code is written. The R3M cache, the heads, and the first results are done (`week3/results/`). What's left is looking at pictures and running Robometer on TACC. All commands run from the repo folder in PowerShell.
+
+1. **Push the branch** so TACC can clone it: `git push -u origin week3-r3m-cache`
+2. **Check the 126 cup labels** (about 20 minutes, can be split between 3 people):
+   `start week3\label_check\cups_label_check.html`, click an answer for each, press "Download results (CSV)", and move the file from Downloads into `week3\label_check\`.
+3. **Mark where 40 failures start** (about 20 minutes each for 2 people):
+   `start week3\onset\mark_onsets.html`, pick Annotator 1 or 2, mark your sheets, press "Download my answers", and move the file into `week3\onset\`. Don't look at each other's answers on the "both" sheets.
+4. **Run Robometer on TACC** (Steps 2 and 3 below). Copy `week3/robometer_scores.jsonl` back to the laptop when it's done.
+5. **Rerun the results** with the label check and Robometer included (about 10 minutes): `py -3.12 week3/run_heads.py`
+6. **Check the failure starts against the heads:** `py -3.12 week3/check_onsets.py`
+
+Steps 2, 3 and 4 don't depend on each other, so different people can do them at the same time.
+
 ## Two things we found while planning (read these first)
 
 **1. The R3M cache runs on the laptop. It does not need TACC.**
@@ -218,10 +233,11 @@ Train each 3 times with different seeds.
 py -3.12 week3/make_onset_sheets.py
 ```
 
-This picks 20 failed **test** attempts per task (40 total, fixed seed) and saves one picture sheet each to `week3/onset/sheets/`. Each sheet shows the same 16 pictures the heads see, numbered 0–15. It also writes `week3/onset/onset_labels.csv`.
+This picks 20 failed **test** attempts per task (40 total, fixed seed) and saves one picture sheet each to `week3/onset/sheets/`. Each sheet shows the same 16 pictures the heads see, numbered 0–15. It also writes `week3/onset/mark_onsets.html`, the page you mark them on, and `week3/onset/onset_sheets.csv`, which says who marks which sheet. (Already done; you only need to rerun it if the sheets get deleted.)
 
-- For each sheet, write the number of the **first picture where you can see the attempt has gone wrong**: a cup tips over, the gripper misses the handle and moves away, or the door stops moving. If you can't tell, leave it blank and say why in `notes`. Many oven failures just run out of time, so the onset can be hard to pin down. Writing "no clear moment" is a useful label too.
-- The `who_labels` column says who labels each sheet. On the 10 `both` rows, each person fills in their own column **without looking at the other's answer**.
+- Open the page, pick Annotator 1 or 2, and for each sheet type the number of the **first frame where you can see the attempt has gone wrong**: a cup tips over, the gripper misses the handle and moves away, or the door stops moving. Many oven failures just run out of time, so if there's no clear moment, tick "No clear moment" and say why in the note. That's a useful answer too.
+- 10 sheets are marked "both". Each person marks those **without looking at the other's answer**.
+- Press "Download my answers" and move `onset_annotator1.csv` or `onset_annotator2.csv` into `week3/onset/`. Then `py -3.12 week3/check_onsets.py` checks agreement and compares the marks with each head's flagged frame.
 - Agreement rule, from the proposal: if the two people disagree by more than 2 pictures on more than 3 of the 10 shared sheets, don't use the hand labels. Report alarm pictures only.
 - These sheets are also our check on the cup labels. If a sheet doesn't look like a failure, say so in `notes`.
 

@@ -1,0 +1,704 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Cup label check</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 1000px; margin: 24px auto; padding: 0 16px; color: #1a1a1a; }
+.item { border-top: 1px solid #ccc; padding: 12px 0; }
+.item img { width: 100%; max-width: 720px; display: block; }
+.done { background: #f3f8ee; }
+.bar { position: sticky; top: 0; background: #fff; padding: 8px 0; border-bottom: 1px solid #ccc; }
+label { margin-right: 16px; }
+</style></head><body>
+<h1>Cup label check</h1>
+<p>Each sheet shows the 16 pictures our heads see, numbered 0 to 15, from start to end.
+For each failure, pick whether it really looks failed. Look at the middle and the end:
+a success ends with the cups stacked and packed. Your answers stay in this browser
+until you press "Download results".</p>
+<div class="bar"><span id="count">0</span> of 126 checked
+<button onclick="download()">Download results (CSV)</button></div>
+<h2>What a success looks like (3 examples)</h2>
+
+<div class="item success" data-id="bsp-speeding-stack-pack-cups-20260120t010226949600-af2c498650" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Success 1 of 3</h3><p>bsp-speeding-stack-pack-cups-20260120t010226949600-af2c498650<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/success_001.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t010226949600-af2c498650">
+</div>
+<div class="item success" data-id="bsp-speeding-stack-pack-cups-20260120t012632126943-6f45db34f0" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Success 2 of 3</h3><p>bsp-speeding-stack-pack-cups-20260120t012632126943-6f45db34f0<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/success_002.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t012632126943-6f45db34f0">
+</div>
+<div class="item success" data-id="bsp-stack-unstack-bspline-1-2-20260124t022530821569-7de7fe4769" data-session="stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes">
+<h3>Success 3 of 3</h3><p>bsp-stack-unstack-bspline-1-2-20260124t022530821569-7de7fe4769<br>session stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes</p>
+<img src="pictures/success_003.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t022530821569-7de7fe4769">
+</div>
+<h2>The 126 cup failures</h2>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t012858496153-fail-391835483f" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 1 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t012858496153-fail-391835483f<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_001.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t012858496153-fail-391835483f">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t012858496153-fail-391835483f" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t012858496153-fail-391835483f" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t012858496153-fail-391835483f" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t013143913494-fail-1c44716cf9" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 2 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t013143913494-fail-1c44716cf9<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_002.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t013143913494-fail-1c44716cf9">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013143913494-fail-1c44716cf9" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013143913494-fail-1c44716cf9" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013143913494-fail-1c44716cf9" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t013328146160-fail-bdb4d7f9dc" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 3 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t013328146160-fail-bdb4d7f9dc<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_003.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t013328146160-fail-bdb4d7f9dc">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013328146160-fail-bdb4d7f9dc" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013328146160-fail-bdb4d7f9dc" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013328146160-fail-bdb4d7f9dc" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t013522106271-fail-913e615d5f" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 4 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t013522106271-fail-913e615d5f<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_004.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t013522106271-fail-913e615d5f">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013522106271-fail-913e615d5f" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013522106271-fail-913e615d5f" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013522106271-fail-913e615d5f" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t013600092004-fail-a0822ca4b8" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 5 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t013600092004-fail-a0822ca4b8<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_005.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t013600092004-fail-a0822ca4b8">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013600092004-fail-a0822ca4b8" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013600092004-fail-a0822ca4b8" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013600092004-fail-a0822ca4b8" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t013716591186-fail-b6d3c1bc96" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 6 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t013716591186-fail-b6d3c1bc96<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_006.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t013716591186-fail-b6d3c1bc96">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013716591186-fail-b6d3c1bc96" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013716591186-fail-b6d3c1bc96" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013716591186-fail-b6d3c1bc96" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t013806955958-fail-d469c42d31" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 7 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t013806955958-fail-d469c42d31<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_007.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t013806955958-fail-d469c42d31">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013806955958-fail-d469c42d31" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013806955958-fail-d469c42d31" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013806955958-fail-d469c42d31" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t013844988584-fail-7c76bb36c5" data-session="speeding-stack-pack-cups-dp-bspline-1x-episodes">
+<h3>Failure 8 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t013844988584-fail-7c76bb36c5<br>session speeding-stack-pack-cups-dp-bspline-1x-episodes</p>
+<img src="pictures/failure_008.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t013844988584-fail-7c76bb36c5">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013844988584-fail-7c76bb36c5" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013844988584-fail-7c76bb36c5" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t013844988584-fail-7c76bb36c5" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t021151674529-fail-41676a655c" data-session="speeding-stack-pack-cups-dp-bspline-2x-episodes">
+<h3>Failure 9 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t021151674529-fail-41676a655c<br>session speeding-stack-pack-cups-dp-bspline-2x-episodes</p>
+<img src="pictures/failure_009.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t021151674529-fail-41676a655c">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021151674529-fail-41676a655c" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021151674529-fail-41676a655c" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021151674529-fail-41676a655c" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t021238670407-fail-41b8478b57" data-session="speeding-stack-pack-cups-dp-bspline-2x-episodes">
+<h3>Failure 10 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t021238670407-fail-41b8478b57<br>session speeding-stack-pack-cups-dp-bspline-2x-episodes</p>
+<img src="pictures/failure_010.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t021238670407-fail-41b8478b57">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021238670407-fail-41b8478b57" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021238670407-fail-41b8478b57" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021238670407-fail-41b8478b57" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t021350198700-fail-db30ce5262" data-session="speeding-stack-pack-cups-dp-bspline-2x-episodes">
+<h3>Failure 11 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t021350198700-fail-db30ce5262<br>session speeding-stack-pack-cups-dp-bspline-2x-episodes</p>
+<img src="pictures/failure_011.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t021350198700-fail-db30ce5262">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021350198700-fail-db30ce5262" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021350198700-fail-db30ce5262" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021350198700-fail-db30ce5262" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t021927251483-fail-08ebc78088" data-session="speeding-stack-pack-cups-dp-bspline-2x-episodes">
+<h3>Failure 12 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t021927251483-fail-08ebc78088<br>session speeding-stack-pack-cups-dp-bspline-2x-episodes</p>
+<img src="pictures/failure_012.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t021927251483-fail-08ebc78088">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021927251483-fail-08ebc78088" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021927251483-fail-08ebc78088" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t021927251483-fail-08ebc78088" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 13 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_013.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t010411244536-fail-c57f440ac6" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 14 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t010411244536-fail-c57f440ac6<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_014.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t010411244536-fail-c57f440ac6">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010411244536-fail-c57f440ac6" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010411244536-fail-c57f440ac6" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010411244536-fail-c57f440ac6" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 15 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_015.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 16 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_016.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 17 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_017.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t011047320759-fail-43e5a20b02" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 18 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t011047320759-fail-43e5a20b02<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_018.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t011047320759-fail-43e5a20b02">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011047320759-fail-43e5a20b02" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011047320759-fail-43e5a20b02" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011047320759-fail-43e5a20b02" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 19 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_019.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t011135044818-fail-00fffaa54f" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 20 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t011135044818-fail-00fffaa54f<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_020.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t011135044818-fail-00fffaa54f">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011135044818-fail-00fffaa54f" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011135044818-fail-00fffaa54f" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011135044818-fail-00fffaa54f" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 21 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_021.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-speeding-stack-pack-cups-20260120t011253303678-fail-c6232b7daf" data-session="speeding-stack-pack-cups-dp-episodes">
+<h3>Failure 22 of 126</h3><p>bsp-speeding-stack-pack-cups-20260120t011253303678-fail-c6232b7daf<br>session speeding-stack-pack-cups-dp-episodes</p>
+<img src="pictures/failure_022.jpg" loading="lazy" alt="16 pictures from bsp-speeding-stack-pack-cups-20260120t011253303678-fail-c6232b7daf">
+<p><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011253303678-fail-c6232b7daf" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011253303678-fail-c6232b7daf" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-speeding-stack-pack-cups-20260120t011253303678-fail-c6232b7daf" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 23 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_023.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 24 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_024.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050353040134-fail-639fd97a65" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 25 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050353040134-fail-639fd97a65<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_025.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050353040134-fail-639fd97a65">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050353040134-fail-639fd97a65" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050353040134-fail-639fd97a65" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050353040134-fail-639fd97a65" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 26 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_026.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 27 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_027.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 28 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_028.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 29 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_029.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 30 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_030.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t050903994384-fail-a98634efaa" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 31 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050903994384-fail-a98634efaa<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_031.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t050903994384-fail-a98634efaa">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050903994384-fail-a98634efaa" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050903994384-fail-a98634efaa" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t050903994384-fail-a98634efaa" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051034692232-fail-904eb5d778" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 32 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051034692232-fail-904eb5d778<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_032.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051034692232-fail-904eb5d778">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051034692232-fail-904eb5d778" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051034692232-fail-904eb5d778" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051034692232-fail-904eb5d778" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 33 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_033.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b" data-session="stack-unstack-bspline-1-2-act-2-episodes">
+<h3>Failure 34 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b<br>session stack-unstack-bspline-1-2-act-2-episodes</p>
+<img src="pictures/failure_034.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024350861482-fail-521ff79dbd" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 35 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024350861482-fail-521ff79dbd<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_035.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024350861482-fail-521ff79dbd">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024350861482-fail-521ff79dbd" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024350861482-fail-521ff79dbd" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024350861482-fail-521ff79dbd" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024422251665-fail-e9fba5d993" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 36 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024422251665-fail-e9fba5d993<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_036.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024422251665-fail-e9fba5d993">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024422251665-fail-e9fba5d993" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024422251665-fail-e9fba5d993" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024422251665-fail-e9fba5d993" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024452204174-fail-966e1494fc" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 37 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024452204174-fail-966e1494fc<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_037.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024452204174-fail-966e1494fc">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024452204174-fail-966e1494fc" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024452204174-fail-966e1494fc" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024452204174-fail-966e1494fc" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024511854223-fail-6769cea002" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 38 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024511854223-fail-6769cea002<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_038.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024511854223-fail-6769cea002">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024511854223-fail-6769cea002" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024511854223-fail-6769cea002" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024511854223-fail-6769cea002" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024532006263-fail-cdcc6bef89" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 39 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024532006263-fail-cdcc6bef89<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_039.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024532006263-fail-cdcc6bef89">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024532006263-fail-cdcc6bef89" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024532006263-fail-cdcc6bef89" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024532006263-fail-cdcc6bef89" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024554255758-fail-9e57997341" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 40 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024554255758-fail-9e57997341<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_040.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024554255758-fail-9e57997341">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024554255758-fail-9e57997341" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024554255758-fail-9e57997341" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024554255758-fail-9e57997341" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024718661342-fail-6057b4c082" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 41 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024718661342-fail-6057b4c082<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_041.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024718661342-fail-6057b4c082">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024718661342-fail-6057b4c082" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024718661342-fail-6057b4c082" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024718661342-fail-6057b4c082" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024751331946-fail-d32be18a6e" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 42 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024751331946-fail-d32be18a6e<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_042.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024751331946-fail-d32be18a6e">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024751331946-fail-d32be18a6e" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024751331946-fail-d32be18a6e" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024751331946-fail-d32be18a6e" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024846935711-fail-7852a45198" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 43 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024846935711-fail-7852a45198<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_043.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024846935711-fail-7852a45198">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024846935711-fail-7852a45198" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024846935711-fail-7852a45198" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024846935711-fail-7852a45198" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t024946953301-fail-7b2214f5de" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 44 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t024946953301-fail-7b2214f5de<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_044.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t024946953301-fail-7b2214f5de">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024946953301-fail-7b2214f5de" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024946953301-fail-7b2214f5de" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t024946953301-fail-7b2214f5de" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t025021835305-fail-88892c5dd1" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 45 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t025021835305-fail-88892c5dd1<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_045.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t025021835305-fail-88892c5dd1">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025021835305-fail-88892c5dd1" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025021835305-fail-88892c5dd1" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025021835305-fail-88892c5dd1" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t025056804697-fail-96b22775d9" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 46 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t025056804697-fail-96b22775d9<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_046.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t025056804697-fail-96b22775d9">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025056804697-fail-96b22775d9" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025056804697-fail-96b22775d9" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025056804697-fail-96b22775d9" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t025133199330-fail-c2f4b338e0" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 47 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t025133199330-fail-c2f4b338e0<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_047.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t025133199330-fail-c2f4b338e0">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025133199330-fail-c2f4b338e0" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025133199330-fail-c2f4b338e0" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025133199330-fail-c2f4b338e0" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t025200926437-fail-20a1eaf081" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 48 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t025200926437-fail-20a1eaf081<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_048.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t025200926437-fail-20a1eaf081">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025200926437-fail-20a1eaf081" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025200926437-fail-20a1eaf081" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025200926437-fail-20a1eaf081" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t025255185826-fail-c717500e52" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 49 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t025255185826-fail-c717500e52<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_049.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t025255185826-fail-c717500e52">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025255185826-fail-c717500e52" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025255185826-fail-c717500e52" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025255185826-fail-c717500e52" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t025413132989-fail-5f260e881a" data-session="stack-unstack-bspline-1-2-act-2x-2-episodes">
+<h3>Failure 50 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t025413132989-fail-5f260e881a<br>session stack-unstack-bspline-1-2-act-2x-2-episodes</p>
+<img src="pictures/failure_050.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t025413132989-fail-5f260e881a">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025413132989-fail-5f260e881a" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025413132989-fail-5f260e881a" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t025413132989-fail-5f260e881a" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022151648013-fail-6a290332c9" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 51 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022151648013-fail-6a290332c9<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_051.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022151648013-fail-6a290332c9">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022151648013-fail-6a290332c9" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022151648013-fail-6a290332c9" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022151648013-fail-6a290332c9" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022257110738-fail-8b4f8ca4e5" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 52 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022257110738-fail-8b4f8ca4e5<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_052.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022257110738-fail-8b4f8ca4e5">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022257110738-fail-8b4f8ca4e5" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022257110738-fail-8b4f8ca4e5" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022257110738-fail-8b4f8ca4e5" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022316908697-fail-ad50461691" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 53 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022316908697-fail-ad50461691<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_053.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022316908697-fail-ad50461691">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022316908697-fail-ad50461691" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022316908697-fail-ad50461691" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022316908697-fail-ad50461691" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022337417152-fail-269745a952" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 54 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022337417152-fail-269745a952<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_054.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022337417152-fail-269745a952">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022337417152-fail-269745a952" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022337417152-fail-269745a952" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022337417152-fail-269745a952" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022436941358-fail-55aabfda18" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 55 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022436941358-fail-55aabfda18<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_055.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022436941358-fail-55aabfda18">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022436941358-fail-55aabfda18" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022436941358-fail-55aabfda18" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022436941358-fail-55aabfda18" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022503022311-fail-a80a47e678" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 56 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022503022311-fail-a80a47e678<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_056.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022503022311-fail-a80a47e678">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022503022311-fail-a80a47e678" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022503022311-fail-a80a47e678" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022503022311-fail-a80a47e678" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022631241948-fail-50f632b794" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 57 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022631241948-fail-50f632b794<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_057.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022631241948-fail-50f632b794">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022631241948-fail-50f632b794" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022631241948-fail-50f632b794" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022631241948-fail-50f632b794" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022758290528-fail-ba17443e97" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 58 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022758290528-fail-ba17443e97<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_058.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022758290528-fail-ba17443e97">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022758290528-fail-ba17443e97" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022758290528-fail-ba17443e97" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022758290528-fail-ba17443e97" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t022815171452-fail-e056503282" data-session="stack-unstack-bspline-1-2-act-4x-2-episodes">
+<h3>Failure 59 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t022815171452-fail-e056503282<br>session stack-unstack-bspline-1-2-act-4x-2-episodes</p>
+<img src="pictures/failure_059.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t022815171452-fail-e056503282">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022815171452-fail-e056503282" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022815171452-fail-e056503282" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t022815171452-fail-e056503282" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t043726605524-fail-6337c6b883" data-session="stack-unstack-bspline-1-2-act-bspline-1x-episodes">
+<h3>Failure 60 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t043726605524-fail-6337c6b883<br>session stack-unstack-bspline-1-2-act-bspline-1x-episodes</p>
+<img src="pictures/failure_060.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t043726605524-fail-6337c6b883">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t043726605524-fail-6337c6b883" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t043726605524-fail-6337c6b883" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t043726605524-fail-6337c6b883" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t043844476739-fail-e4eb6337c7" data-session="stack-unstack-bspline-1-2-act-bspline-1x-episodes">
+<h3>Failure 61 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t043844476739-fail-e4eb6337c7<br>session stack-unstack-bspline-1-2-act-bspline-1x-episodes</p>
+<img src="pictures/failure_061.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t043844476739-fail-e4eb6337c7">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t043844476739-fail-e4eb6337c7" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t043844476739-fail-e4eb6337c7" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t043844476739-fail-e4eb6337c7" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t044232751200-fail-519dc82b5e" data-session="stack-unstack-bspline-1-2-act-bspline-1x-episodes">
+<h3>Failure 62 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t044232751200-fail-519dc82b5e<br>session stack-unstack-bspline-1-2-act-bspline-1x-episodes</p>
+<img src="pictures/failure_062.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t044232751200-fail-519dc82b5e">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044232751200-fail-519dc82b5e" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044232751200-fail-519dc82b5e" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044232751200-fail-519dc82b5e" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t044442426860-fail-c4a6f3754e" data-session="stack-unstack-bspline-1-2-act-bspline-1x-episodes">
+<h3>Failure 63 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t044442426860-fail-c4a6f3754e<br>session stack-unstack-bspline-1-2-act-bspline-1x-episodes</p>
+<img src="pictures/failure_063.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t044442426860-fail-c4a6f3754e">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044442426860-fail-c4a6f3754e" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044442426860-fail-c4a6f3754e" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044442426860-fail-c4a6f3754e" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t044523744911-fail-a5b8620db2" data-session="stack-unstack-bspline-1-2-act-bspline-1x-episodes">
+<h3>Failure 64 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t044523744911-fail-a5b8620db2<br>session stack-unstack-bspline-1-2-act-bspline-1x-episodes</p>
+<img src="pictures/failure_064.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t044523744911-fail-a5b8620db2">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044523744911-fail-a5b8620db2" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044523744911-fail-a5b8620db2" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044523744911-fail-a5b8620db2" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t044548443952-fail-5f86e2b81c" data-session="stack-unstack-bspline-1-2-act-bspline-1x-episodes">
+<h3>Failure 65 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t044548443952-fail-5f86e2b81c<br>session stack-unstack-bspline-1-2-act-bspline-1x-episodes</p>
+<img src="pictures/failure_065.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t044548443952-fail-5f86e2b81c">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044548443952-fail-5f86e2b81c" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044548443952-fail-5f86e2b81c" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t044548443952-fail-5f86e2b81c" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051404939968-fail-6a601b3f01" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 66 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051404939968-fail-6a601b3f01<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_066.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051404939968-fail-6a601b3f01">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051404939968-fail-6a601b3f01" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051404939968-fail-6a601b3f01" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051404939968-fail-6a601b3f01" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051654543329-fail-5570fd2cd1" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 67 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051654543329-fail-5570fd2cd1<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_067.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051654543329-fail-5570fd2cd1">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051654543329-fail-5570fd2cd1" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051654543329-fail-5570fd2cd1" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051654543329-fail-5570fd2cd1" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051741850611-fail-8e588df6ba" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 68 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051741850611-fail-8e588df6ba<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_068.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051741850611-fail-8e588df6ba">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051741850611-fail-8e588df6ba" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051741850611-fail-8e588df6ba" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051741850611-fail-8e588df6ba" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051828870583-fail-e4a893e726" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 69 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051828870583-fail-e4a893e726<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_069.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051828870583-fail-e4a893e726">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051828870583-fail-e4a893e726" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051828870583-fail-e4a893e726" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051828870583-fail-e4a893e726" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051911503149-fail-dcc64394fb" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 70 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051911503149-fail-dcc64394fb<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_070.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051911503149-fail-dcc64394fb">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051911503149-fail-dcc64394fb" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051911503149-fail-dcc64394fb" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051911503149-fail-dcc64394fb" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t051937560669-fail-ae2196e50d" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 71 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051937560669-fail-ae2196e50d<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_071.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t051937560669-fail-ae2196e50d">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051937560669-fail-ae2196e50d" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051937560669-fail-ae2196e50d" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t051937560669-fail-ae2196e50d" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t052000864278-fail-0a906ca53a" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 72 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t052000864278-fail-0a906ca53a<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_072.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t052000864278-fail-0a906ca53a">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052000864278-fail-0a906ca53a" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052000864278-fail-0a906ca53a" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052000864278-fail-0a906ca53a" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t052018839264-fail-913bf2f2c2" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 73 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t052018839264-fail-913bf2f2c2<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_073.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t052018839264-fail-913bf2f2c2">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052018839264-fail-913bf2f2c2" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052018839264-fail-913bf2f2c2" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052018839264-fail-913bf2f2c2" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t052042210149-fail-c5246881a5" data-session="stack-unstack-bspline-1-2-act-bspline-2x-episodes">
+<h3>Failure 74 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t052042210149-fail-c5246881a5<br>session stack-unstack-bspline-1-2-act-bspline-2x-episodes</p>
+<img src="pictures/failure_074.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t052042210149-fail-c5246881a5">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052042210149-fail-c5246881a5" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052042210149-fail-c5246881a5" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052042210149-fail-c5246881a5" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t052856115755-fail-3eeddb4c43" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 75 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t052856115755-fail-3eeddb4c43<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_075.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t052856115755-fail-3eeddb4c43">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052856115755-fail-3eeddb4c43" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052856115755-fail-3eeddb4c43" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052856115755-fail-3eeddb4c43" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t052920063694-fail-8295b50215" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 76 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t052920063694-fail-8295b50215<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_076.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t052920063694-fail-8295b50215">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052920063694-fail-8295b50215" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052920063694-fail-8295b50215" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052920063694-fail-8295b50215" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t052939047774-fail-ad34e3f67a" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 77 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t052939047774-fail-ad34e3f67a<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_077.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t052939047774-fail-ad34e3f67a">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052939047774-fail-ad34e3f67a" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052939047774-fail-ad34e3f67a" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t052939047774-fail-ad34e3f67a" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t053002211455-fail-708a085a3e" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 78 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t053002211455-fail-708a085a3e<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_078.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t053002211455-fail-708a085a3e">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053002211455-fail-708a085a3e" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053002211455-fail-708a085a3e" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053002211455-fail-708a085a3e" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t053038786261-fail-0de7712991" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 79 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t053038786261-fail-0de7712991<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_079.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t053038786261-fail-0de7712991">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053038786261-fail-0de7712991" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053038786261-fail-0de7712991" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053038786261-fail-0de7712991" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t053103522292-fail-63536fb07d" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 80 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t053103522292-fail-63536fb07d<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_080.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t053103522292-fail-63536fb07d">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053103522292-fail-63536fb07d" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053103522292-fail-63536fb07d" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053103522292-fail-63536fb07d" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t053125798412-fail-9a1e47558e" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 81 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t053125798412-fail-9a1e47558e<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_081.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t053125798412-fail-9a1e47558e">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053125798412-fail-9a1e47558e" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053125798412-fail-9a1e47558e" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053125798412-fail-9a1e47558e" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t053207921960-fail-d0f088ab68" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 82 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t053207921960-fail-d0f088ab68<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_082.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t053207921960-fail-d0f088ab68">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053207921960-fail-d0f088ab68" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053207921960-fail-d0f088ab68" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053207921960-fail-d0f088ab68" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t053236120486-fail-f3d5fd19e9" data-session="stack-unstack-bspline-1-2-act-bspline-3x-episodes">
+<h3>Failure 83 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t053236120486-fail-f3d5fd19e9<br>session stack-unstack-bspline-1-2-act-bspline-3x-episodes</p>
+<img src="pictures/failure_083.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t053236120486-fail-f3d5fd19e9">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053236120486-fail-f3d5fd19e9" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053236120486-fail-f3d5fd19e9" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t053236120486-fail-f3d5fd19e9" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t032412040225-fail-46b4b81f40" data-session="stack-unstack-bspline-1-2-dp-2-episodes">
+<h3>Failure 84 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t032412040225-fail-46b4b81f40<br>session stack-unstack-bspline-1-2-dp-2-episodes</p>
+<img src="pictures/failure_084.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t032412040225-fail-46b4b81f40">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t032412040225-fail-46b4b81f40" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t032412040225-fail-46b4b81f40" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t032412040225-fail-46b4b81f40" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t033024815343-fail-baa0e2149a" data-session="stack-unstack-bspline-1-2-dp-2-episodes">
+<h3>Failure 85 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t033024815343-fail-baa0e2149a<br>session stack-unstack-bspline-1-2-dp-2-episodes</p>
+<img src="pictures/failure_085.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t033024815343-fail-baa0e2149a">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033024815343-fail-baa0e2149a" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033024815343-fail-baa0e2149a" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033024815343-fail-baa0e2149a" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t033109292320-fail-ed303beab5" data-session="stack-unstack-bspline-1-2-dp-2-episodes">
+<h3>Failure 86 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t033109292320-fail-ed303beab5<br>session stack-unstack-bspline-1-2-dp-2-episodes</p>
+<img src="pictures/failure_086.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t033109292320-fail-ed303beab5">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033109292320-fail-ed303beab5" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033109292320-fail-ed303beab5" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033109292320-fail-ed303beab5" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t033149772508-fail-bc49fb82d1" data-session="stack-unstack-bspline-1-2-dp-2-episodes">
+<h3>Failure 87 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t033149772508-fail-bc49fb82d1<br>session stack-unstack-bspline-1-2-dp-2-episodes</p>
+<img src="pictures/failure_087.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t033149772508-fail-bc49fb82d1">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033149772508-fail-bc49fb82d1" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033149772508-fail-bc49fb82d1" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033149772508-fail-bc49fb82d1" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t033638541335-fail-2bb218f40a" data-session="stack-unstack-bspline-1-2-dp-2-episodes">
+<h3>Failure 88 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t033638541335-fail-2bb218f40a<br>session stack-unstack-bspline-1-2-dp-2-episodes</p>
+<img src="pictures/failure_088.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t033638541335-fail-2bb218f40a">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033638541335-fail-2bb218f40a" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033638541335-fail-2bb218f40a" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033638541335-fail-2bb218f40a" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t033823869055-fail-2cb9d24eb9" data-session="stack-unstack-bspline-1-2-dp-2-episodes">
+<h3>Failure 89 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t033823869055-fail-2cb9d24eb9<br>session stack-unstack-bspline-1-2-dp-2-episodes</p>
+<img src="pictures/failure_089.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t033823869055-fail-2cb9d24eb9">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033823869055-fail-2cb9d24eb9" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033823869055-fail-2cb9d24eb9" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t033823869055-fail-2cb9d24eb9" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t011446953572-fail-1b3ae9a786" data-session="stack-unstack-bspline-1-2-dp-2x-episodes">
+<h3>Failure 90 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t011446953572-fail-1b3ae9a786<br>session stack-unstack-bspline-1-2-dp-2x-episodes</p>
+<img src="pictures/failure_090.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t011446953572-fail-1b3ae9a786">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011446953572-fail-1b3ae9a786" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011446953572-fail-1b3ae9a786" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011446953572-fail-1b3ae9a786" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t011801523515-fail-ed9f4586fb" data-session="stack-unstack-bspline-1-2-dp-2x-episodes">
+<h3>Failure 91 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t011801523515-fail-ed9f4586fb<br>session stack-unstack-bspline-1-2-dp-2x-episodes</p>
+<img src="pictures/failure_091.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t011801523515-fail-ed9f4586fb">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011801523515-fail-ed9f4586fb" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011801523515-fail-ed9f4586fb" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011801523515-fail-ed9f4586fb" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t011851318647-fail-4f74fae15a" data-session="stack-unstack-bspline-1-2-dp-2x-episodes">
+<h3>Failure 92 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t011851318647-fail-4f74fae15a<br>session stack-unstack-bspline-1-2-dp-2x-episodes</p>
+<img src="pictures/failure_092.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t011851318647-fail-4f74fae15a">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011851318647-fail-4f74fae15a" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011851318647-fail-4f74fae15a" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011851318647-fail-4f74fae15a" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t011911179546-fail-4b9e990359" data-session="stack-unstack-bspline-1-2-dp-2x-episodes">
+<h3>Failure 93 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t011911179546-fail-4b9e990359<br>session stack-unstack-bspline-1-2-dp-2x-episodes</p>
+<img src="pictures/failure_093.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t011911179546-fail-4b9e990359">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011911179546-fail-4b9e990359" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011911179546-fail-4b9e990359" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t011911179546-fail-4b9e990359" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t012040516031-fail-3f3622c4a5" data-session="stack-unstack-bspline-1-2-dp-2x-episodes">
+<h3>Failure 94 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t012040516031-fail-3f3622c4a5<br>session stack-unstack-bspline-1-2-dp-2x-episodes</p>
+<img src="pictures/failure_094.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t012040516031-fail-3f3622c4a5">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t012040516031-fail-3f3622c4a5" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t012040516031-fail-3f3622c4a5" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t012040516031-fail-3f3622c4a5" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t013553612751-fail-ed9f23ce78" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 95 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t013553612751-fail-ed9f23ce78<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_095.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t013553612751-fail-ed9f23ce78">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t013553612751-fail-ed9f23ce78" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t013553612751-fail-ed9f23ce78" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t013553612751-fail-ed9f23ce78" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 96 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_096.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 97 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_097.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 98 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_098.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t014321830831-fail-4ddc834bc8" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 99 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014321830831-fail-4ddc834bc8<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_099.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t014321830831-fail-4ddc834bc8">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014321830831-fail-4ddc834bc8" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014321830831-fail-4ddc834bc8" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014321830831-fail-4ddc834bc8" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 100 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_100.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t014426776854-fail-5db812f6cf" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 101 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014426776854-fail-5db812f6cf<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_101.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t014426776854-fail-5db812f6cf">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014426776854-fail-5db812f6cf" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014426776854-fail-5db812f6cf" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014426776854-fail-5db812f6cf" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c" data-session="stack-unstack-bspline-1-2-dp-4x-2-episodes">
+<h3>Failure 102 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c<br>session stack-unstack-bspline-1-2-dp-4x-2-episodes</p>
+<img src="pictures/failure_102.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t022734314492-fail-03e08938b8" data-session="stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes">
+<h3>Failure 103 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t022734314492-fail-03e08938b8<br>session stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes</p>
+<img src="pictures/failure_103.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t022734314492-fail-03e08938b8">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t022734314492-fail-03e08938b8" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t022734314492-fail-03e08938b8" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t022734314492-fail-03e08938b8" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t022937012320-fail-47a65d5854" data-session="stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes">
+<h3>Failure 104 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t022937012320-fail-47a65d5854<br>session stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes</p>
+<img src="pictures/failure_104.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t022937012320-fail-47a65d5854">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t022937012320-fail-47a65d5854" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t022937012320-fail-47a65d5854" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t022937012320-fail-47a65d5854" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t023337126407-fail-65dd40a37f" data-session="stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes">
+<h3>Failure 105 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t023337126407-fail-65dd40a37f<br>session stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes</p>
+<img src="pictures/failure_105.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t023337126407-fail-65dd40a37f">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023337126407-fail-65dd40a37f" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023337126407-fail-65dd40a37f" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023337126407-fail-65dd40a37f" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t023459543019-fail-abbdb3f7ea" data-session="stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes">
+<h3>Failure 106 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t023459543019-fail-abbdb3f7ea<br>session stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes</p>
+<img src="pictures/failure_106.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t023459543019-fail-abbdb3f7ea">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023459543019-fail-abbdb3f7ea" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023459543019-fail-abbdb3f7ea" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023459543019-fail-abbdb3f7ea" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t023520537659-fail-6e63ec3e07" data-session="stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes">
+<h3>Failure 107 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t023520537659-fail-6e63ec3e07<br>session stack-unstack-bspline-1-2-dp-bspline-1x-2-episodes</p>
+<img src="pictures/failure_107.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t023520537659-fail-6e63ec3e07">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023520537659-fail-6e63ec3e07" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023520537659-fail-6e63ec3e07" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t023520537659-fail-6e63ec3e07" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t024030256862-fail-e0d3063a53" data-session="stack-unstack-bspline-1-2-dp-bspline-2x-2-episodes">
+<h3>Failure 108 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t024030256862-fail-e0d3063a53<br>session stack-unstack-bspline-1-2-dp-bspline-2x-2-episodes</p>
+<img src="pictures/failure_108.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t024030256862-fail-e0d3063a53">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024030256862-fail-e0d3063a53" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024030256862-fail-e0d3063a53" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024030256862-fail-e0d3063a53" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t024125942289-fail-7024061b36" data-session="stack-unstack-bspline-1-2-dp-bspline-2x-2-episodes">
+<h3>Failure 109 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t024125942289-fail-7024061b36<br>session stack-unstack-bspline-1-2-dp-bspline-2x-2-episodes</p>
+<img src="pictures/failure_109.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t024125942289-fail-7024061b36">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024125942289-fail-7024061b36" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024125942289-fail-7024061b36" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024125942289-fail-7024061b36" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t024626804256-fail-1f978bea49" data-session="stack-unstack-bspline-1-2-dp-bspline-2x-2-episodes">
+<h3>Failure 110 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t024626804256-fail-1f978bea49<br>session stack-unstack-bspline-1-2-dp-bspline-2x-2-episodes</p>
+<img src="pictures/failure_110.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t024626804256-fail-1f978bea49">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024626804256-fail-1f978bea49" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024626804256-fail-1f978bea49" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t024626804256-fail-1f978bea49" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t025627337164-fail-ed3d9676c9" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 111 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t025627337164-fail-ed3d9676c9<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_111.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t025627337164-fail-ed3d9676c9">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025627337164-fail-ed3d9676c9" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025627337164-fail-ed3d9676c9" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025627337164-fail-ed3d9676c9" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t025650306377-fail-e95f25b0c8" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 112 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t025650306377-fail-e95f25b0c8<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_112.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t025650306377-fail-e95f25b0c8">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025650306377-fail-e95f25b0c8" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025650306377-fail-e95f25b0c8" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025650306377-fail-e95f25b0c8" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t025738286416-fail-f8a765019e" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 113 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t025738286416-fail-f8a765019e<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_113.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t025738286416-fail-f8a765019e">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025738286416-fail-f8a765019e" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025738286416-fail-f8a765019e" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025738286416-fail-f8a765019e" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t025823162407-fail-1d2778dc41" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 114 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t025823162407-fail-1d2778dc41<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_114.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t025823162407-fail-1d2778dc41">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025823162407-fail-1d2778dc41" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025823162407-fail-1d2778dc41" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t025823162407-fail-1d2778dc41" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t030002789059-fail-f4677af5e0" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 115 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t030002789059-fail-f4677af5e0<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_115.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t030002789059-fail-f4677af5e0">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030002789059-fail-f4677af5e0" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030002789059-fail-f4677af5e0" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030002789059-fail-f4677af5e0" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t030052030424-fail-83f72c0843" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 116 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t030052030424-fail-83f72c0843<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_116.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t030052030424-fail-83f72c0843">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030052030424-fail-83f72c0843" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030052030424-fail-83f72c0843" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030052030424-fail-83f72c0843" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t030159689232-fail-cf853e1a56" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 117 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t030159689232-fail-cf853e1a56<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_117.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t030159689232-fail-cf853e1a56">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030159689232-fail-cf853e1a56" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030159689232-fail-cf853e1a56" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030159689232-fail-cf853e1a56" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t030435851302-fail-74d38043ec" data-session="stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes">
+<h3>Failure 118 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t030435851302-fail-74d38043ec<br>session stack-unstack-bspline-1-2-dp-bspline-3x-2-episodes</p>
+<img src="pictures/failure_118.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t030435851302-fail-74d38043ec">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030435851302-fail-74d38043ec" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030435851302-fail-74d38043ec" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t030435851302-fail-74d38043ec" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031247119970-fail-3355006a8a" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 119 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031247119970-fail-3355006a8a<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_119.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031247119970-fail-3355006a8a">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031247119970-fail-3355006a8a" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031247119970-fail-3355006a8a" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031247119970-fail-3355006a8a" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031418504343-fail-b51a3cb588" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 120 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031418504343-fail-b51a3cb588<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_120.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031418504343-fail-b51a3cb588">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031418504343-fail-b51a3cb588" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031418504343-fail-b51a3cb588" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031418504343-fail-b51a3cb588" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031440464746-fail-0d87a95c39" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 121 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031440464746-fail-0d87a95c39<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_121.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031440464746-fail-0d87a95c39">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031440464746-fail-0d87a95c39" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031440464746-fail-0d87a95c39" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031440464746-fail-0d87a95c39" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031500467770-fail-b0dfa4311e" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 122 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031500467770-fail-b0dfa4311e<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_122.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031500467770-fail-b0dfa4311e">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031500467770-fail-b0dfa4311e" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031500467770-fail-b0dfa4311e" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031500467770-fail-b0dfa4311e" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031526525207-fail-73328e5cbc" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 123 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031526525207-fail-73328e5cbc<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_123.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031526525207-fail-73328e5cbc">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031526525207-fail-73328e5cbc" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031526525207-fail-73328e5cbc" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031526525207-fail-73328e5cbc" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031650494360-fail-68d2911ab7" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 124 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031650494360-fail-68d2911ab7<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_124.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031650494360-fail-68d2911ab7">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031650494360-fail-68d2911ab7" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031650494360-fail-68d2911ab7" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031650494360-fail-68d2911ab7" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031727722263-fail-88309ce3e2" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 125 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031727722263-fail-88309ce3e2<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_125.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031727722263-fail-88309ce3e2">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031727722263-fail-88309ce3e2" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031727722263-fail-88309ce3e2" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031727722263-fail-88309ce3e2" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<div class="item failure" data-id="bsp-stack-unstack-bspline-1-2-20260124t031928647557-fail-b631ea1931" data-session="stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes">
+<h3>Failure 126 of 126</h3><p>bsp-stack-unstack-bspline-1-2-20260124t031928647557-fail-b631ea1931<br>session stack-unstack-bspline-1-2-dp-bspline-4x-2-episodes</p>
+<img src="pictures/failure_126.jpg" loading="lazy" alt="16 pictures from bsp-stack-unstack-bspline-1-2-20260124t031928647557-fail-b631ea1931">
+<p><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031928647557-fail-b631ea1931" value="failed"> Yes, it failed</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031928647557-fail-b631ea1931" value="looks_success"> No, it looks like a success</label><label><input type="radio" name="bsp-stack-unstack-bspline-1-2-20260124t031928647557-fail-b631ea1931" value="unsure"> Not sure</label><input type="text" placeholder="note (what went wrong, which picture)" size="40"></p>
+</div>
+<script>
+var KEY = "cup-label-check";
+var saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+function store() { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} }
+function refresh() {
+  var n = 0;
+  document.querySelectorAll(".item.failure").forEach(function (item) {
+    var answer = (saved[item.dataset.id] || {}).answer;
+    item.classList.toggle("done", !!answer);
+    if (answer) n++;
+  });
+  document.getElementById("count").textContent = n;
+}
+document.querySelectorAll(".item.failure").forEach(function (item) {
+  var id = item.dataset.id, entry = saved[id] || {};
+  item.querySelectorAll("input[type=radio]").forEach(function (radio) {
+    radio.checked = radio.value === entry.answer;
+    radio.addEventListener("change", function () {
+      saved[id] = saved[id] || {}; saved[id].answer = radio.value; store(); refresh();
+    });
+  });
+  var note = item.querySelector("input[type=text]");
+  note.value = entry.note || "";
+  note.addEventListener("input", function () {
+    saved[id] = saved[id] || {}; saved[id].note = note.value; store();
+  });
+});
+function download() {
+  var lines = ["episode_id,session_id,answer,note"];
+  document.querySelectorAll(".item.failure").forEach(function (item) {
+    var entry = saved[item.dataset.id] || {};
+    var note = (entry.note || "").replace(/"/g, '""');
+    lines.push([item.dataset.id, item.dataset.session, entry.answer || "", '"' + note + '"'].join(","));
+  });
+  var link = document.createElement("a");
+  link.href = URL.createObjectURL(new Blob([lines.join("\n") + "\n"], {type: "text/csv"}));
+  link.download = "cups_label_check.csv";
+  link.click();
+}
+refresh();
+</script></body></html>

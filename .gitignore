@@ -12,3 +12,5 @@ manifest.csv
 data/
 __pycache__/
 week3/*.pt
+week3/label_check/pictures/
+week3/onset/sheets/
