@@ -12,8 +12,12 @@ Needs week3/results/flags.csv (from run_heads.py) for the second part.
    frames after the start (median), and how many it never flagged.
 
 Run:  py -3.12 week3/check_onsets.py
+For another run:  py -3.12 week3/check_onsets.py --results results_frames8   (or results_cross, ...)
+Marks are on the 16-frame sheets, so flagged frames from 8- or 32-frame runs are put on
+the 16-frame scale first (frame f of N becomes f * 15 / (N - 1)).
 """
 
+import argparse
 import csv
 import os
 from collections import defaultdict
@@ -39,6 +43,9 @@ def read_answers(name):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--results", default="results", help="folder in week3/ that holds flags.csv")
+    args = parser.parse_args()
     with open(os.path.join(ONSET, "onset_sheets.csv"), encoding="utf-8") as f:
         sheets = list(csv.DictReader(f))
     first, second = read_answers("annotator1"), read_answers("annotator2")
@@ -86,14 +93,15 @@ def main():
     lines.append("Attempts with a marked start: %d. Marked 'no clear moment': %d. Not marked: %d." % (
         len(onset), no_moment, len(sheets) - len(onset) - no_moment))
 
-    flags_path = os.path.join(HERE, "results", "flags.csv")
+    flags_path = os.path.join(HERE, args.results, "flags.csv")
     if os.path.exists(flags_path) and onset:
         runs = defaultdict(lambda: defaultdict(list))
         with open(flags_path, encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 if row["label"] == "failure" and row["episode_id"] in onset:
-                    runs[(row["task"], row["head"])][row["seed"]].append(
-                        (onset[row["episode_id"]], None if row["flagged_frame"] == "" else int(row["flagged_frame"])))
+                    frames = int(row.get("frames") or 16)
+                    flagged = None if row["flagged_frame"] == "" else int(row["flagged_frame"]) * 15 / (frames - 1)
+                    runs[(row["task"], row["head"])][row["seed"]].append((onset[row["episode_id"]], flagged))
         lines.append("")
         lines.append("Flagged frame against the marked start, test failures only, averaged over seeds.")
         lines.append("%-11s %-10s %-8s %-11s %-15s %-24s %-8s" % (
@@ -115,8 +123,8 @@ def main():
         lines.append("Run week3/run_heads.py first to compare with the heads.")
 
     text = "\n".join(lines)
-    os.makedirs(os.path.join(HERE, "results"), exist_ok=True)
-    with open(os.path.join(HERE, "results", "onset_check.txt"), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.join(HERE, args.results), exist_ok=True)
+    with open(os.path.join(HERE, args.results, "onset_check.txt"), "w", encoding="utf-8") as f:
         f.write(text + "\n")
     print(text)
 

@@ -6,6 +6,8 @@ laptop CPU; 400 episodes x 16 pictures is 6,400 pictures.
 
 Timing test first:   py -3.12 week3/cache_r3m.py --limit 2
 Full run:            py -3.12 week3/cache_r3m.py
+Other frame counts:  py -3.12 week3/cache_r3m.py --frames 8     (writes r3m_cache_8.pt)
+                     py -3.12 week3/cache_r3m.py --frames 32    (writes r3m_cache_32.pt)
 """
 
 import argparse
@@ -35,7 +37,7 @@ def pick_rows(rows, limit):
 
 
 def to_r3m_batch(frames):
-    """(16, H, W, 3) uint8 -> (16, 3, 224, 224) float in 0..255.
+    """(frames, H, W, 3) uint8 -> (frames, 3, 224, 224) float in 0..255.
 
     R3M only resizes when told the input is not 224 x 224, so the cup pictures
     (640 x 480) are resized here. The whole picture is kept instead of center
@@ -50,9 +52,13 @@ def to_r3m_batch(frames):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", default=os.path.dirname(HERE), help="repo folder that holds week2/")
-    parser.add_argument("--out", default=os.path.join(HERE, "r3m_cache.pt"))
+    parser.add_argument("--frames", type=int, default=16, help="pictures kept per episode")
+    parser.add_argument("--out", default=None, help="default r3m_cache.pt for 16 frames, r3m_cache_<N>.pt otherwise")
     parser.add_argument("--limit", type=int, default=0, help="timing test: N successes and N failures per task")
     args = parser.parse_args()
+    if args.out is None:
+        name = "r3m_cache.pt" if args.frames == 16 else "r3m_cache_%d.pt" % args.frames
+        args.out = os.path.join(HERE, name)
 
     sys.path.insert(0, os.path.join(args.repo, "week2"))
     from loader import load_episode
@@ -74,7 +80,7 @@ def main():
     for number, row in enumerate(rows, start=1):
         t0 = time.time()
         try:
-            episode = load_episode(row["h5_path"], row["task"])
+            episode = load_episode(row["h5_path"], row["task"], args.frames)
         except RuntimeError as error:
             # One unreadable video should not throw away the other 399.
             print("Skipped %s: %s" % (row["episode_id"], error))
@@ -104,10 +110,10 @@ def main():
                 number, len(rows), row["task"], row["label"], t1 - t0, t2 - t1, time.time() - start))
 
     saved = {
-        "embedding": torch.stack(embeddings),  # (episodes, 16, 2048)
+        "embedding": torch.stack(embeddings),  # (episodes, frames, 2048)
         "episodes": episodes,
         "skipped": skipped,
-        "note": "Frozen R3M resnet50. 16 pictures per episode, resized to 224 x 224, whole picture kept.",
+        "note": "Frozen R3M resnet50. %d pictures per episode, resized to 224 x 224, whole picture kept." % args.frames,
     }
     torch.save(saved, args.out)
     total = time.time() - start

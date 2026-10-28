@@ -2,20 +2,47 @@
 
 Claas said to start running experiments and send him a status update, so this week is about getting first numbers, not polishing the plan. The write-up comes at the end of the week, once there are results to report.
 
-## What's left (updated Oct 21)
+## What's left (updated Oct 28)
 
-All the code is written. The R3M cache, the heads, and the first results are done (`week3/results/`). What's left is looking at pictures and running Robometer on TACC. All commands run from the repo folder in PowerShell.
+All the code is written. The R3M cache, the heads, the first results, and the cup label check are done (`week3/results/`). What's left is marking failure starts, running Robometer on TACC, and the extra checks below. All commands run from the repo folder in PowerShell.
 
 1. **Push the branch** so TACC can clone it: `git push -u origin week3-r3m-cache`
-2. **Check the 126 cup labels** (about 20 minutes, can be split between 3 people):
-   `start week3\label_check\cups_label_check.html`, click an answer for each, press "Download results (CSV)", and move the file from Downloads into `week3\label_check\`.
+2. ~~Check the 126 cup labels~~ Done: all 126 still look like failures (`week3\label_check\cups_label_check.csv`).
 3. **Mark where 40 failures start** (about 20 minutes each for 2 people):
    `start week3\onset\mark_onsets.html`, pick Annotator 1 or 2, mark your sheets, press "Download my answers", and move the file into `week3\onset\`. Don't look at each other's answers on the "both" sheets.
 4. **Run Robometer on TACC** (Steps 2 and 3 below). Copy `week3/robometer_scores.jsonl` back to the laptop when it's done.
 5. **Rerun the results** with the label check and Robometer included (about 10 minutes): `py -3.12 week3/run_heads.py`
 6. **Check the failure starts against the heads:** `py -3.12 week3/check_onsets.py`
 
-Steps 2, 3 and 4 don't depend on each other, so different people can do them at the same time.
+Steps 3 and 4 don't depend on each other, so different people can do them at the same time.
+
+### Extra checks (week 5, after Claas's feedback)
+
+**Does 16 frames matter? Rerun with 8 and 32.** First make the R3M numbers for the new frame count, then run the heads on them. Each writes to its own folder, so the 16-frame results in `week3/results/` stay as they are.
+
+```powershell
+py -3.12 week3/cache_r3m.py --frames 8      # about 15 minutes, writes week3/r3m_cache_8.pt
+py -3.12 week3/run_heads.py --frames 8      # about 5 minutes, writes week3/results_frames8/
+py -3.12 week3/cache_r3m.py --frames 32     # about 35 minutes, writes week3/r3m_cache_32.pt
+py -3.12 week3/run_heads.py --frames 32     # about 15 minutes, writes week3/results_frames32/
+```
+
+The stay-down setting s is scaled so it covers the same share of the attempt (8 frames: 1 or 2; 32 frames: 4, 6, or 8). Each results table also gives the median flagged frame on the 16-frame scale, so the three runs can be compared side by side, and the claim check uses that scale. Robometer is only in the 16-frame run, since it scored the 16-frame set.
+
+**Train on one task, test on the other.**
+
+```powershell
+py -3.12 week3/run_heads.py --cross         # about 8 minutes, writes week3/results_cross/
+```
+
+Each head trains on one task's training attempts and is tested on the other task's test attempts. The flag setting is picked on the training task only. The two tasks are different robots and different rooms, so don't be surprised if this works badly. That's still a result worth reporting.
+
+**Graphs and failure-start checks for any of these runs:** add `--results` with the folder name.
+
+```powershell
+py -3.12 week3/plot_scores.py --results results_frames8
+py -3.12 week3/check_onsets.py --results results_frames8
+```
 
 ## Two things we found while planning (read these first)
 

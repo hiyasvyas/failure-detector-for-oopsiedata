@@ -20,14 +20,17 @@ TASKS = {
 }
 
 
-def sample_16(video_path):
-    """16 picture numbers spread from the first frame to the last, including both ends."""
+def sample_16(video_path, count=16):
+    """16 picture numbers spread from the first frame to the last, including both ends.
+
+    count changes how many (week 3 checks 8 and 32 against 16).
+    """
     n = 0
     for _ in iio.imiter(video_path):
         n += 1
     if n < 2:
         raise RuntimeError("Video has too few frames: " + video_path)
-    wanted = [int(x) for x in np.linspace(0, n - 1, 16)]
+    wanted = [int(x) for x in np.linspace(0, n - 1, count)]
     wanted_set = set(wanted)
     grabbed = {}
     for index, frame in enumerate(iio.imiter(video_path)):
@@ -114,12 +117,12 @@ def index_all():
     return rows
 
 
-def load_episode(h5_path, task):
-    """Record plus 16 pictures. frames shape is (16, height, width, 3)."""
+def load_episode(h5_path, task, count=16):
+    """Record plus 16 pictures (or count). frames shape is (count, height, width, 3)."""
     record = read_record(h5_path, task)
     if not record["video_exists"]:
         raise RuntimeError("Missing video: " + record["video_path"])
-    frames, indexes, n_frames = sample_16(record["video_path"])
+    frames, indexes, n_frames = sample_16(record["video_path"], count)
     record["n_frames"] = n_frames
     record["frame_indexes"] = indexes
     record["frames"] = frames
