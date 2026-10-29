@@ -1,0 +1,55 @@
+Results from week3/run_heads.py (16 frames per attempt, trained on one task and tested on the other)
+Cup failures checked on the label-check page: 126. Left out: 0.
+Robometer scores: not run yet.
+
+====================================================================================================
+Trained on open_oven (34 successes, 66 failures), tested on stack_cups (18 successes, 30 failures)
+The flag setting is picked on open_oven only. Nothing from stack_cups is used before testing.
+Left out after the label check: 0.   Success/failure pairs for ranking (Heads B, C): 22.
+
+Per-frame heads. Counts are on the test attempts, averaged over seeds.
+'Median frame' is the median flagged frame on test failures (0-15), counting a failure that
+was never flagged as 16. 'Flagged early' means flagged before the last 3 of 16 frames
+(in the first 80% of the attempt).
+head       median frame by seed   false flags    failures flagged  flagged early     setting d, s     episode F1
+A1         16.0 / 10.0 / 13.5     11.7 of 18     17.0 of 30        11.0 of 30        0.20, 2 / 0.20, 4 / 0.10, 4 0.46      
+A2         15.0 / 15.0 / 15.0     18.0 of 18     30.0 of 30        0.0 of 30         0.20, 3 / 0.20, 4 / 0.20, 4 0.77      
+B          12.0 / 15.0 / 15.0     18.0 of 18     29.7 of 30        5.7 of 30         0.20, 4 / 0.20, 3 / 0.20, 4 0.76      
+C          15.0 / 15.0 / 15.0     18.0 of 18     30.0 of 30        0.0 of 30         0.20, 3 / 0.20, 4 / 0.20, 4 0.77      
+D          15.0                   18.0 of 18     30.0 of 30        0.0 of 30         0.20, 4          0.77      
+
+Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
+  most common label                        accuracy 0.62   episode F1 0.77   failures caught 30 of 30   successes called failures 18 of 18
+  logistic regression, mean of 16 frames   accuracy 0.38   episode F1 0.00   failures caught 0 of 30   successes called failures 0 of 18
+  logistic regression, all 16 frames       accuracy 0.38   episode F1 0.00   failures caught 0 of 30   successes called failures 0 of 18
+
+First look at the claim (flagged frames on the 16-frame scale, failure start times not used yet):
+  average median frame: A1 13.2, A2 15.0, B 14.0, C 15.0   largest spread between seeds: 6.0
+  1. B at least 2 frames earlier than both A1 and A2, and before frame 13: no
+  2. C not 2 or more frames earlier than B: yes
+
+====================================================================================================
+Trained on stack_cups (56 successes, 96 failures), tested on open_oven (18 successes, 82 failures)
+The flag setting is picked on stack_cups only. Nothing from open_oven is used before testing.
+Left out after the label check: 0.   Success/failure pairs for ranking (Heads B, C): 355.
+
+Per-frame heads. Counts are on the test attempts, averaged over seeds.
+'Median frame' is the median flagged frame on test failures (0-15), counting a failure that
+was never flagged as 16. 'Flagged early' means flagged before the last 3 of 16 frames
+(in the first 80% of the attempt).
+head       median frame by seed   false flags    failures flagged  flagged early     setting d, s     episode F1
+A1         15.0 / 16.0 / 16.0     9.7 of 18      32.7 of 82        3.3 of 82         0.10, 4 / 0.20, 3 / 0.10, 4 0.41      
+A2         15.0 / 15.0 / 15.0     18.0 of 18     82.0 of 82        1.3 of 82         0.20, 4 / 0.20, 4 / 0.20, 4 0.90      
+B          15.0 / 16.0 / 16.0     9.0 of 18      34.7 of 82        3.0 of 82         0.05, 4 / 0.20, 3 / 0.10, 4 0.43      
+C          16.0 / 16.0 / 16.0     0.0 of 18      0.0 of 82         0.0 of 82         0.20, 4 / 0.20, 4 / 0.20, 4 0.00      
+D          15.0                   18.0 of 18     82.0 of 82        0.0 of 82         0.20, 4          0.90      
+
+Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
+  most common label                        accuracy 0.82   episode F1 0.90   failures caught 82 of 82   successes called failures 18 of 18
+  logistic regression, mean of 16 frames   accuracy 0.82   episode F1 0.90   failures caught 82 of 82   successes called failures 18 of 18
+  logistic regression, all 16 frames       accuracy 0.18   episode F1 0.00   failures caught 0 of 82   successes called failures 0 of 18
+
+First look at the claim (flagged frames on the 16-frame scale, failure start times not used yet):
+  average median frame: A1 15.7, A2 15.0, B 15.7, C 16.0   largest spread between seeds: 1.0
+  1. B at least 2 frames earlier than both A1 and A2, and before frame 13: no
+  2. C not 2 or more frames earlier than B: yes
