@@ -2,7 +2,7 @@
 
 Claas said to start running experiments and send him a status update, so this week is about getting first numbers, not polishing the plan. The write-up comes at the end of the week, once there are results to report.
 
-## What's left (updated Oct 28)
+## What's left (updated Nov 2)
 
 All the code is written. The R3M cache, the heads, the first results, and the cup label check are done (`week3/results/`). What's left is marking failure starts, running Robometer on TACC, and the extra checks below. All commands run from the repo folder in PowerShell.
 
@@ -16,7 +16,9 @@ All the code is written. The R3M cache, the heads, the first results, and the cu
 
 Steps 3 and 4 don't depend on each other, so different people can do them at the same time.
 
-### Extra checks (week 5, after Claas's feedback)
+### Extra checks (8 frames and cross-task done, 32 frames running)
+
+The 8-frame run and the train-on-one-task run are done (`week3/results_frames8/`, `week3/results_cross/`). The 32-frame run was restarted on Nov 2 (`week3/results_frames32/`). The commands are kept here in case we need to rerun them after changing the flagging rule.
 
 **Does 16 frames matter? Rerun with 8 and 32.** First make the R3M numbers for the new frame count, then run the heads on them. Each writes to its own folder, so the 16-frame results in `week3/results/` stay as they are.
 
@@ -153,10 +155,13 @@ On TACC, clone the repo into `$WORK`:
 
 ```bash
 cd $WORK
-git clone https://github.com/hiyasvyas/failure-detector-for-oopsiedata.git
+git clone -b week3-r3m-cache https://github.com/hiyasvyas/failure-detector-for-oopsiedata.git
+cd failure-detector-for-oopsiedata
+sed -i 's/YOUR_ALLOCATION/PUT_THE_NAME_HERE/' week3/tacc/*.slurm   # the name taccinfo printed
+grep -- "-A" week3/tacc/*.slurm                                     # check both lines changed
 ```
 
-If the repo is private, git asks for a username and password. The password must be a GitHub personal access token, not your GitHub password.
+The TACC scripts are on the `week3-r3m-cache` branch, not `main`, so push that branch first (step 1 of "What's left") and clone it with `-b`. If the repo is private, git asks for a username and password. The password must be a GitHub personal access token, not your GitHub password.
 
 On the laptop (PowerShell), pack the two tasks into one file and send it. That's about 370 MB, and packing first means one upload and one Token code:
 

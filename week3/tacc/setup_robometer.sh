@@ -23,10 +23,10 @@ cd robometer
 
 # Robometer asks for Python 3.10; uv downloads it. The "robometer" extra adds transformers.
 uv sync --extra robometer
-# Video readers for our week-2 loader.
-uv pip install av imageio-ffmpeg
+# Episode files and video readers for our week-2 loader.
+uv pip install h5py imageio av imageio-ffmpeg
 
 .venv/bin/python -c "import torch; print('torch', torch.__version__, 'cuda', torch.cuda.is_available(), torch.cuda.get_device_name(0))"
-.venv/bin/python -c "import robometer, transformers, av; print('robometer imports ok, transformers', transformers.__version__)"
+.venv/bin/python -c "import robometer, transformers, av, h5py, imageio; print('robometer imports ok, transformers', transformers.__version__)"
 .venv/bin/python -c "from huggingface_hub import snapshot_download; print('weights in', snapshot_download('robometer/Robometer-4B'))"
 echo "Setup finished."
