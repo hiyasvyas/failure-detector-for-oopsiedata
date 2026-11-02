@@ -217,3 +217,124 @@ C:\Users\sunee\Downloads\New folder\Lib\site-packages\torchvision\models\_utils.
 160/400  open_oven failure  read 0.4s  r3m 3.8s  total 654s
 180/400  open_oven failure  read 0.4s  r3m 4.1s  total 745s
 200/400  open_oven success  read 0.5s  r3m 5.0s  total 843s
+=== (the 32-frame run above was stopped at 200/400 on Oct 28 and restarted from scratch on Nov 02)
+=== cache_r3m.py --frames 32  start 14:59:20
+C:\Users\sunee\Downloads\New folder\Lib\site-packages\torch\nn\modules\loss.py:48: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  self.reduction: str = _Reduction.legacy_get_string(size_average, reduce)
+C:\Users\sunee\Downloads\New folder\Lib\site-packages\torchvision\models\_utils.py:207: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+C:\Users\sunee\Downloads\New folder\Lib\site-packages\torchvision\models\_utils.py:222: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Loading frozen R3M resnet50. This does not train the model.
+ 20/400  open_oven failure  read 0.6s  r3m 4.6s  total 119s
+ 40/400  open_oven failure  read 0.4s  r3m 3.7s  total 220s
+ 60/400  open_oven failure  read 0.3s  r3m 4.1s  total 303s
+ 80/400  open_oven failure  read 0.4s  r3m 3.7s  total 388s
+100/400  open_oven failure  read 0.4s  r3m 5.0s  total 478s
+120/400  open_oven success  read 0.3s  r3m 4.8s  total 585s
+140/400  open_oven failure  read 0.7s  r3m 4.7s  total 693s
+160/400  open_oven failure  read 0.6s  r3m 4.6s  total 798s
+180/400  open_oven failure  read 0.6s  r3m 4.7s  total 901s
+200/400  open_oven success  read 0.5s  r3m 4.6s  total 1006s
+220/400  stack_cups failure  read 0.6s  r3m 4.8s  total 1130s
+240/400  stack_cups success  read 3.2s  r3m 4.7s  total 1286s
+260/400  stack_cups failure  read 1.8s  r3m 4.8s  total 1432s
+280/400  stack_cups failure  read 1.9s  r3m 4.8s  total 1562s
+300/400  stack_cups failure  read 1.7s  r3m 4.8s  total 1688s
+320/400  stack_cups failure  read 1.2s  r3m 4.9s  total 1831s
+340/400  stack_cups failure  read 1.5s  r3m 4.7s  total 1954s
+360/400  stack_cups success  read 2.0s  r3m 4.8s  total 2083s
+380/400  stack_cups failure  read 3.3s  r3m 4.9s  total 2220s
+400/400  stack_cups failure  read 1.5s  r3m 4.7s  total 2351s
+
+Episodes: 400 done, 0 skipped
+Reading video: 488s total, 1.22s per episode
+R3M:           1863s total, 4.66s per episode
+Estimate for all 400 episodes: 39 minutes
+Saved (400, 32, 2048) to C:\Users\sunee\fri-oopsiedata-week1\week3\r3m_cache_32.pt
+=== cache_r3m.py --frames 32  end 15:38:58
+=== run_heads.py --frames 32  start 15:38:58
+  open_oven A1 seed 0: d=0.20 s=6, median frame 32.0
+  open_oven A1 seed 1: d=0.10 s=6, median frame 31.0
+  open_oven A1 seed 2: d=0.10 s=6, median frame 32.0
+  open_oven A2 seed 0: d=0.20 s=8, median frame 31.0
+  open_oven A2 seed 1: d=0.20 s=6, median frame 31.0
+  open_oven A2 seed 2: d=0.20 s=6, median frame 31.0
+  open_oven B seed 0: d=0.20 s=8, median frame 31.0
+  open_oven B seed 1: d=0.20 s=6, median frame 31.0
+  open_oven B seed 2: d=0.20 s=6, median frame 31.0
+  open_oven C seed 0: d=0.20 s=8, median frame 31.0
+  open_oven C seed 1: d=0.20 s=4, median frame 31.0
+  open_oven C seed 2: d=0.20 s=8, median frame 31.0
+  open_oven D seed 0: d=0.20 s=8, median frame 31.0
+  stack_cups A1 seed 0: d=0.20 s=4, median frame 32.0
+  stack_cups A1 seed 1: d=0.20 s=8, median frame 32.0
+  stack_cups A1 seed 2: d=0.20 s=6, median frame 32.0
+  stack_cups A2 seed 0: d=0.20 s=8, median frame 31.0
+  stack_cups A2 seed 1: d=0.20 s=6, median frame 31.0
+  stack_cups A2 seed 2: d=0.20 s=8, median frame 31.0
+  stack_cups B seed 0: d=0.10 s=8, median frame 31.0
+  stack_cups B seed 1: d=0.20 s=6, median frame 31.0
+  stack_cups B seed 2: d=0.10 s=6, median frame 30.5
+  stack_cups C seed 0: d=0.20 s=8, median frame 29.5
+  stack_cups C seed 1: d=0.20 s=8, median frame 28.0
+  stack_cups C seed 2: d=0.20 s=8, median frame 31.0
+  stack_cups D seed 0: d=0.20 s=8, median frame 32.0
+Results from week3/run_heads.py (32 frames per attempt)
+Cup failures checked on the label-check page: 126. Left out: 0.
+Robometer scores: not run yet.
+
+====================================================================================================
+open_oven   train: 34 successes, 66 failures   test: 18 successes, 82 failures
+Left out after the label check: 0.   Success/failure pairs for ranking (Heads B, C): 22.
+
+Per-frame heads. Counts are on the test attempts, averaged over seeds.
+'Median frame' is the median flagged frame on test failures (0-31), counting a failure that
+was never flagged as 32. 'Flagged early' means flagged before the last 3 of 16 frames
+(in the first 80% of the attempt).
+'Median, 16-frame scale' puts the median frame where it would fall among 16 frames (0-15).
+head       median frame by seed   median, 16-frame scale   false flags    failures flagged  flagged early     setting d, s     episode F1
+A1         32.0 / 31.0 / 32.0     16.0 / 15.0 / 16.0       4.3 of 18      38.0 of 82        19.0 of 82        0.20, 6 / 0.10, 6 / 0.10, 6 0.60      
+A2         31.0 / 31.0 / 31.0     15.0 / 15.0 / 15.0       12.3 of 18     79.0 of 82        2.3 of 82         0.20, 8 / 0.20, 6 / 0.20, 6 0.91      
+B          31.0 / 31.0 / 31.0     15.0 / 15.0 / 15.0       6.0 of 18      65.0 of 82        6.7 of 82         0.20, 8 / 0.20, 6 / 0.20, 6 0.85      
+C          31.0 / 31.0 / 31.0     15.0 / 15.0 / 15.0       10.3 of 18     62.3 of 82        16.3 of 82        0.20, 8 / 0.20, 4 / 0.20, 8 0.81      
+D          31.0                   15.0                     10.0 of 18     48.0 of 82        26.0 of 82        0.20, 8          0.69      
+
+Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
+  most common label                        accuracy 0.82   episode F1 0.90   failures caught 82 of 82   successes called failures 18 of 18
+  logistic regression, mean of 32 frames   accuracy 0.47   episode F1 0.55   failures caught 32 of 82   successes called failures 3 of 18
+  logistic regression, all 32 frames       accuracy 0.75   episode F1 0.83   failures caught 61 of 82   successes called failures 4 of 18
+
+First look at the claim (flagged frames on the 16-frame scale, failure start times not used yet):
+  average median frame: A1 15.7, A2 15.0, B 15.0, C 15.0   largest spread between seeds: 1.0
+  1. B at least 2 frames earlier than both A1 and A2, and before frame 13: no
+  2. C not 2 or more frames earlier than B: yes
+
+====================================================================================================
+stack_cups   train: 56 successes, 96 failures   test: 18 successes, 30 failures
+Left out after the label check: 0.   Success/failure pairs for ranking (Heads B, C): 355.
+
+Per-frame heads. Counts are on the test attempts, averaged over seeds.
+'Median frame' is the median flagged frame on test failures (0-31), counting a failure that
+was never flagged as 32. 'Flagged early' means flagged before the last 3 of 16 frames
+(in the first 80% of the attempt).
+'Median, 16-frame scale' puts the median frame where it would fall among 16 frames (0-15).
+head       median frame by seed   median, 16-frame scale   false flags    failures flagged  flagged early     setting d, s     episode F1
+A1         32.0 / 32.0 / 32.0     16.0 / 16.0 / 16.0       0.3 of 18      11.0 of 30        2.7 of 30         0.20, 4 / 0.20, 8 / 0.20, 6 0.53      
+A2         31.0 / 31.0 / 31.0     15.0 / 15.0 / 15.0       5.3 of 18      24.0 of 30        7.7 of 30         0.20, 8 / 0.20, 6 / 0.20, 8 0.81      
+B          31.0 / 31.0 / 30.5     15.0 / 15.0 / 14.8       0.7 of 18      21.3 of 30        6.7 of 30         0.10, 8 / 0.20, 6 / 0.10, 6 0.82      
+C          29.5 / 28.0 / 31.0     14.3 / 13.5 / 15.0       2.7 of 18      24.0 of 30        9.0 of 30         0.20, 8 / 0.20, 8 / 0.20, 8 0.85      
+D          32.0                   16.0                     0.0 of 18      14.0 of 30        5.0 of 30         0.20, 8          0.64      
+
+Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
+  most common label                        accuracy 0.62   episode F1 0.77   failures caught 30 of 30   successes called failures 18 of 18
+  logistic regression, mean of 32 frames   accuracy 0.85   episode F1 0.87   failures caught 24 of 30   successes called failures 1 of 18
+  logistic regression, all 32 frames       accuracy 1.00   episode F1 1.00   failures caught 30 of 30   successes called failures 0 of 18
+
+First look at the claim (flagged frames on the 16-frame scale, failure start times not used yet):
+  average median frame: A1 16.0, A2 15.0, B 14.9, C 14.3   largest spread between seeds: 1.5
+  1. B at least 2 frames earlier than both A1 and A2, and before frame 13: no
+  2. C not 2 or more frames earlier than B: yes
+=== run_heads.py --frames 32  end 15:50:10
+Wrote C:\Users\sunee\fri-oopsiedata-week1\week3\results_frames32\average_scores.png
+=== all done 15:50:15
