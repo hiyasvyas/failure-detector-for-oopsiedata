@@ -15,3 +15,6 @@ week3/*.pt
 week3/label_check/pictures/
 week3/onset/sheets/
 week3/share/
+
+# The project figure shows OopsieData frames, which are private.
+proposal/figures/
