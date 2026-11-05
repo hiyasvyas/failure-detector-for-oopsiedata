@@ -35,11 +35,11 @@ def find(rows, ending):
     return next(r for r in rows if r["episode_id"].endswith(ending))
 
 
-def box(ax, x, y, w, h, title, lines):
+def box(ax, x, y, w, h, title, lines, size=7):
     ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.01,rounding_size=0.02",
                                 facecolor=BOX, edgecolor=AXIS, linewidth=0.8, clip_on=False))
     ax.text(x + w / 2, y + h - 0.035, title, ha="center", va="top", fontsize=8.5, weight="bold", color=INK)
-    ax.text(x + w / 2, y + h - 0.105, lines, ha="center", va="top", fontsize=7, color=INK, linespacing=1.25)
+    ax.text(x + w / 2, y + h - 0.105, lines, ha="center", va="top", fontsize=size, color=INK, linespacing=1.25)
 
 
 def arrow(fig, start, end):
@@ -94,14 +94,14 @@ def main():
     box(mid, 0.02, 0.72, 0.96, 0.25, "Frozen R3M", "not trained by us\n2,048 numbers per frame")
     box(mid, 0.02, 0.01, 0.96, 0.65, "Head (small network)",
         "one score (0 to 1) per frame\n\ntraining signal:\n"
-        "A1: progress on successes\nA2: A1 + failure ends at 0\nB: A1 + ranking\n"
-        "C: B + success/failure label\nD: no training, distance to\nnearest success frame")
+        "Prog-Base: progress\nProgress-Zero: + failure ends at 0\nProg+Ranking: + ranking\n"
+        "Prog+Rank+Label: + label\nDistance-Baseline: no training,\ndistance to nearest success", size=6.3)
     mid.annotate("", xy=(0.5, 0.665), xytext=(0.5, 0.715),
                  arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1, mutation_scale=9))
 
-    # (c) Head B's real scores for the two attempts and the flagging rule.
+    # (c) Prog+Ranking's (Head B's) real scores for the two attempts and the flagging rule.
     ax = fig.add_axes((0.745, 0.17, 0.24, 0.68))
-    fig.text(0.68, 0.93, "(c) Head B scores and the flag", fontsize=8.5, weight="bold")
+    fig.text(0.68, 0.93, "(c) Prog+Ranking scores, flag", fontsize=8.5, weight="bold")
     x = np.arange(16)
     name, color, _, scores, flagged, d, s = episodes[1]
     peak = int(np.argmax(scores[:flagged + 1]))

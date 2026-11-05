@@ -22,6 +22,9 @@ import numpy as np  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 HEADS = ("A1", "A2", "B", "C", "D")
+# Names the midterm report uses for the heads.
+NAMES = {"A1": "Prog-Base", "A2": "Progress-Zero", "B": "Prog+Ranking", "C": "Prog+Rank+Label",
+         "D": "Distance-Baseline"}
 TASKS = (("open_oven", "Oven"), ("stack_cups", "Cups"))
 SUCCESS, FAILURE = "#2a78d6", "#eb6834"
 INK, MUTED, GRID, AXIS, BAND = "#0b0b0b", "#898781", "#e1e0d9", "#c3c2b7", "#f1f0ec"
@@ -66,7 +69,7 @@ def main():
             ax.set_ylim(0, 1)
             ax.set_yticks([0, 0.5, 1])
             if r == 0:
-                ax.set_title("Head " + head, fontsize=11, color=INK)
+                ax.set_title(NAMES[head], fontsize=11, color=INK)
             if c == 0:
                 ax.set_ylabel(task_name + "\naverage score", color=INK)
             if r == 1:
