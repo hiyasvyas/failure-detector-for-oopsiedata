@@ -1,0 +1,148 @@
+\documentclass{article}
+
+\usepackage[final]{fri_rl_2026}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\setlist{nosep} % Removes all extra vertical space in lists globally
+
+\title{Spotting the Moment a Robot Fails on OopsieData:\\ Midterm Report}
+
+\author{%
+  Annie Li, Phoebe Wang, and Hiya Vyas\\
+  The University of Texas at Austin
+}
+
+\begin{document}
+\maketitle
+
+%===============================================================================
+
+\begin{abstract}
+Robots working on their own often fail a task without realizing it. Our project is to build a lightweight detector that looks at the camera frames from an attempt and identifies the frame where the attempt starts to fail. Our idea is that the ranking signal, which makes a model give a successful attempt a higher score than a failed one, is what makes the score drop when an attempt fails. We test this by comparing small networks, which we call heads, that give each frame a progress score and are the same except for their training signal. So far, the head trained with ranking is not two frames earlier than the heads trained only on progress on either task, so this first look does not support our claim.
+\end{abstract}
+
+%===============================================================================
+
+\section{Introduction}
+
+Robots working on their own often fail a task without realizing it. In one task from our dataset, where a robot has to open an oven, it sometimes never gets the door open and keeps moving its arm around until time runs out. If nobody is watching, there is no way to know if the task failed, let alone where it went wrong. Our project is to build a lightweight detector that looks at the camera frames from an attempt and identifies the frame where the attempt starts to fail. For now, we test it on recorded attempts.
+
+\paragraph{Gap.} Methods that find the exact failure frame are expensive. Robometer~\citep{robometer}, for example, finds failures by looking for drops in its progress score, which is Robometer's estimate of how far along the robot is in finishing the task. However, Robometer is a 4-billion-parameter vision-language model, so it needs a large GPU and a lot of computation for every frame it scores. Another state-of-the-art method, Foresight~\citep{foresight}, runs a large world model (a model that predicts what will happen next) at every step, which is also expensive. On the other hand, lightweight methods like the ARMBench classifiers~\citep{armbench} and ARMOR~\citep{armor} only say whether the whole attempt failed and do not find the exact moment of failure. Other lightweight methods, like ActProbe~\citep{actprobe} and VLA-FAIL~\citep{vlafail}, do score every step, but they need information we do not have: ActProbe and VLA-FAIL watch the full action plans and internal features of the robot's policy (the model that controls the robot), while OopsieData only records the one action the robot took at each step. Overall, current methods are either too heavy or cannot point out the exact failure frame.
+
+\paragraph{Insight.} Robometer combines a large pretrained vision-language model with two training signals, where a training signal is what a model is told to get right while it learns. It is unclear whether the large model or the training signals make it work. Our project tests this with a small model. One of Robometer's training signals is progress, where every frame of a successful video gets a target score that goes from 0 at the start to 1 at the end. The other is ranking, where the model is shown a successful and a failed attempt at the same task and has to give the successful one a higher score. Our idea is that the ranking signal is what makes the score drop when an attempt fails. A model trained on progress alone has only seen successes, so when a failed attempt starts out looking like a success, it keeps giving it a rising score. This is what the PROGRESSOR paper~\citep{progressor} found with R3M~\citep{r3m} (the vision model we use) and VIP~\citep{vip}, where the scores for successful and failed attempts looked almost the same.
+
+\paragraph{Plan.} We use two tasks from OopsieData~\citep{oopsiedata}, each involving a different skill on a different robot. The two tasks are Araya's ``Open the Oven,'' which has 200 attempts (52 successes and 148 failures), and Harvard EML's ``Stack and Pack the Cups,'' which has 200 attempts (74 successes and 126 failures). Every attempt is already labeled as a success or failure, but the frame where the failure started is not. We split the attempts into a training set, which the models learn from, and a test set, which we use at the end to see how well they did. The attempts are separated by recording session, so all attempts recorded in the same sitting go into the same set. We take 16 frames spread evenly from the first frame to the last. If we used every frame, a model could just learn that long videos are failures without learning what a failure actually looks like.
+
+R3M, a pretrained vision model, takes one frame and turns it into an embedding, which is a list of 2,048 numbers that describes what is in the picture. A head is a small two-layer network that turns one frame's numbers into a progress score between 0 and 1, where 0 means the robot has not made progress yet and 1 means the task looks finished. Finally, the flagging rule reads an attempt's 16 scores in order and decides which frame, if any, is where the attempt went wrong. We train five heads and compare them against each other to find out which training signal makes the progress score drop. We also compare them against Robometer, which we run on the same 16 frames without retraining it. The heads differ only in their training signal, and everything else stays the same:
+\begin{itemize}
+    \item \textbf{Prog-Base, progress on successes only:} frame $t$ (0 to 15) of a success gets a target, the score we train the head to output, of $t/15$. Failures get no target. This is our control.
+    \item \textbf{Progress-Zero, progress that also uses failures:} Prog-Base's targets for successes, plus a target of 0 on the last frame of each failure, since a failed attempt never finishes.
+    \item \textbf{Prog+Ranking, progress plus ranking:} Prog-Base's targets for successes, plus a ranking rule for each matched pair (a success and a failure from the same setup). We average each attempt's 16 progress scores, and the success's average has to be at least 0.2 higher than the failure's.
+    \item \textbf{Prog+Rank+Label, ranking plus a success or failure label:} Prog+Ranking's setup, plus the head is also trained to predict directly whether the attempt succeeded from its average progress score. Prog+Rank+Label checks whether the plain success or failure label, rather than ranking, is what makes the score drop.
+    \item \textbf{Distance-Baseline, no training:} we store R3M's embeddings for every frame of every training success. A new frame scores high if it looks like a stored success frame and low if it doesn't, similar to PatchCore~\citep{patchcore}. If Distance-Baseline flags failures as early as Prog+Ranking, then just looking different from a success is enough, and the ranking signal is not needed.
+\end{itemize}
+
+To identify where the failure begins, we use one fixed rule for every head and for Robometer. We walk through the scores and track the highest score seen so far. Then, we flag the first frame where the score falls at least a certain amount ($d$) below that maximum and stays down for a certain number of frames in a row ($s$). For each head, we pick $d$ and $s$ so that about 10\% of successes are falsely flagged, which puts every head on equal footing. We lock $d$ and $s$ before we run the heads on our test set.
+
+\paragraph{What we expected.} If our idea is right, Prog+Ranking's score for a failed attempt should rise like a success at first, since a matched success and failure start out looking almost the same, and then drop once the attempt starts going wrong, so Prog+Ranking should flag failures at least 2 frames earlier than Prog-Base. If Prog-Base flags them just as early, then ranking is not what makes the score drop. We say the claim holds only if both of these are true:
+\begin{enumerate}
+    \item Prog+Ranking's median flagged frame is at least 2 frames earlier than both Prog-Base and Progress-Zero, and before the last 3 of the 16 frames.
+    \item Prog+Rank+Label is not 2 or more frames earlier than Prog+Ranking. If it is, the success or failure label is doing the work, not the ranking.
+\end{enumerate}
+We train each head 3 times, and if two heads differ by less than a head differs from itself across runs, we call it a tie.
+
+\paragraph{Was the gap really a gap, and did our insight hold?} The gap was real: a simple classifier that sees all 16 frames of a cup attempt caught all 30 cup test failures and only called two of the 18 successes failures, so R3M's embeddings can tell a success from a failure, but none of our heads can yet point to an early failure frame. Our insight has not held so far. Prog+Ranking is not two frames earlier than Prog-Base and Progress-Zero on either task, so this first look does not support our claim.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.92\textwidth]{project_figure.png}
+    \caption{Our pipeline on one real cup success (blue) and failure (orange) from the same test session. (a) We take 16 evenly spaced frames from each attempt (5 shown). (b) R3M and a head turn each frame into a progress score. (c) Prog+Ranking's scores for these two attempts. The failure's score stays at least $d=0.05$ below its highest score so far (dotted line) for $s=4$ frames in a row (gray band), so it is flagged at frame 14, which is inside the last 3 frames.}
+    \label{fig:project}
+\end{figure}
+
+%===============================================================================
+
+\section{Reflection: Where are we?}
+
+\paragraph{What we've done so far.}
+\begin{itemize}
+    \item \textbf{Weeks 1 and 2:} Built a loader that selects the 16 frames we use from each attempt's video. Ran R3M on all 400 attempts and saved the embeddings. Trained all five heads and ran the baselines on both tasks, which was earlier than planned since each head only takes a few seconds to train.
+    \item \textbf{Week 3:} Checked all 126 cup failure labels by eye, and all of them still looked like failures. Wrote the code for marking where failures start, but we have not marked any yet. Wrote the scripts to install Robometer on TACC, UT's supercomputer, and test it on eight attempts, but we have not run them yet.
+\end{itemize}
+
+\paragraph{What we found.} Before training, we wanted to check whether R3M's embeddings actually look different for a success and a failure. \textbf{Oven:} A success and a failure from the same setup look almost the same for most of the attempt. They only start to look different in the last 4 frames (frames 12 to 15), which is when the door opens in a success. \textbf{Cups:} In this task, the difference shows up earlier. The clearest sign is the very last frame. A failure ends without the cups packed, so its last frame looks very different from a success.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{3}{c}{Oven (18 successes, 82 failures)} & \multicolumn{3}{c}{Cups (18 successes, 30 failures)} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+ & Median & False flags & Flagged & Median & False flags & Flagged \\
+\midrule
+Prog-Base         & 16   & 1.7 & 19.7 (6.0)  & About 5 & 0   & 24.0 (20.7) \\
+Progress-Zero     & 15   & 9.3 & 78.0 (9.0)  & 15      & 6.0 & 23.3 (8.7) \\
+Prog+Ranking      & 15.5 & 3.3 & 43.3 (6.0)  & 14.3    & 2.3 & 21.0 (6.7) \\
+Prog+Rank+Label   & 15   & 8.0 & 66.0 (16.3) & 14.5    & 3.0 & 26.0 (10.3) \\
+Distance-Baseline & 15   & 11  & 46 (26)     & 15      & 1   & 16 (6) \\
+\bottomrule
+\end{tabular}
+\caption{Test results. ``Median'' is the median flagged frame on test failures (16 means most were not flagged). ``False flags'' counts successes flagged by mistake. ``Flagged'' counts failures flagged, with those flagged before the last 3 frames in parentheses. Averaged over 3 training runs, except Distance-Baseline.}
+\label{tab:results}
+\end{table}
+
+\textbf{Oven:} No head flags oven failures early (Table~\ref{tab:results}). Every head's median flagged frame is 15 or later, and Prog-Base's is 16, which means it did not flag most oven failures.
+
+\textbf{Cups:} Prog-Base, our control, flagged most cup failures around frame 5 without falsely flagging any successes, which at first, appears like the control beat every other head. However, when we looked at Prog-Base's scores, many failures get a high score at frame 1 that then gradually decreases over time. In one of the runs, 21 of the 30 test failures had their highest early score at frame 1, and that fall is what sets off the flag a few frames later. Thus, Prog-Base is reacting to something at frame 1, not something that goes wrong around frame 5. The other heads flag cup failures around frames 14 and 15.
+
+\textbf{Scores flatten out instead of dropping.} When we plotted the average score at each frame, Prog+Ranking and Prog+Rank+Label do give failures lower scores than successes in the second half of both tasks. However, the failure scores mostly flatten out instead of dropping, while the success scores keep rising. Our flagging rule only looks for drops from the highest score so far, so it cannot catch a score that just stops going up until the very end.
+
+\paragraph{What we learned from our mentor, and what we will change.} In our status paper, we asked our mentor four questions about these problems. Here is what we learned and what we plan to change.
+\begin{itemize}
+    \item \textbf{Progress-Zero:} Our mentor confirmed that giving the last frame of each failure a target of 0 is what was meant by having Prog-Base use the failures, so we keep Progress-Zero as it is.
+    \item \textbf{Frames for Robometer:} Robometer was trained on 8 frames per attempt, and we asked whether to give it 8 or the same 16 frames our heads get. Our mentor said 16 is fine if we can explain it with evidence. With 8 frames, ours would be about 1.5 to 5 seconds apart, which is too far apart to pinpoint where an attempt went wrong. To back this up, we will score the same test attempts with both 8 and 16 frames and check that 16 does not make Robometer's scores worse.
+    \item \textbf{The ``before the last 3 frames'' rule:} Since a success and a failure on the oven only look different in the last 4 frames, we asked whether to keep the rule that Prog+Ranking has to flag before the last 3 frames. Our mentor said to change it, since it is a rule we made up, and that ideally we would test it on held-out attempts. We plan to replace it with our hand-marked failure starts: a flag before the marked start does not count as a catch, and Prog+Ranking has to flag at least 2 frames closer to the start than Prog-Base and Progress-Zero. Since we have already seen our test results, we will decide the new rule before looking at the test set again.
+    \item \textbf{The flagging rule:} Since failure scores flatten out instead of dropping, we asked whether to change the flagging rule. Our mentor said to change it, so we plan to make it also flag a score that stops rising. Besides a drop from the highest score so far, the new rule will also flag a frame once a head's score stays at least $d$ below the average score of training successes at that frame for $s$ frames in a row.
+\end{itemize}
+
+%===============================================================================
+
+\section{Updated work plan}
+
+\paragraph{Next week:} Mark the failure start on 40 test failures, with 10 marked by two of us. On TACC, copy the data over, install Robometer, and test it on eight attempts for both tasks, with both 8 and 16 frames, to see how long it takes. If Robometer does not install, we proceed on everything else, since those tasks do not need TACC. If we disagree by more than 2 frames on more than 3 of the 10 attempts we both mark, the marks are not reliable enough to grade against, and we only report flagged frames.
+
+\paragraph{Following week:} Change the flagging rule so it also catches scores that stop rising, replace the ``before the last 3 frames'' rule with our marked failure starts, and rerun all the heads. Run Robometer on all 400 attempts and put its scores through the same flagging rule. If Robometer still does not work, we drop the Robometer comparison.
+
+\paragraph{Following week after:} Rerun with 8 and 32 selected frames to check that our results do not depend on using 16. If we fall behind, we drop things like Robometer, Prog+Rank+Label, and the marked failure starts. The smallest experiment that can still show our claim is wrong is Prog-Base against Prog+Ranking on the cup task.
+
+\paragraph{Last week:} Write the report and presentation.
+
+%===============================================================================
+
+\section{AI statement}
+We used Claude, an AI assistant, to write and run most of our code, and to help draft our status paper and put it into this format. We decided what to test, read the results ourselves, edited the writing, and checked its numbers against our result files.
+
+%===============================================================================
+
+\begingroup
+\small
+\setlength{\bibsep}{0pt}
+\begin{thebibliography}{11}
+\bibitem{oopsiedata} Oopsie Data. OopsieData. \url{https://oopsie-data.com/}, 2026.
+\bibitem{r3m} Suraj Nair, Aravind Rajeswaran, Vikash Kumar, Chelsea Finn, and Abhinav Gupta. R3M: A Universal Visual Representation for Robot Manipulation. arXiv:2203.12601, 2022.
+\bibitem{robometer} Anthony Liang et al. Robometer: Scaling General-Purpose Robotic Reward Models via Trajectory Comparisons. arXiv:2603.02115, 2026.
+\bibitem{vip} Yecheng Jason Ma, Shagun Sodhani, Dinesh Jayaraman, Osbert Bastani, Vikash Kumar, and Amy Zhang. VIP: Towards Universal Visual Reward and Representation via Value-Implicit Pre-Training. arXiv:2210.00030, 2022.
+\bibitem{progressor} Tewodros Ayalew et al. PROGRESSOR: A Perceptually Guided Reward Estimator with Self-Supervised Online Refinement. arXiv:2411.17764, 2024.
+\bibitem{foresight} Haoran Zhang et al. Foresight: Failure Detection for Long-Horizon Robotic Manipulation with Action-Conditioned World Model Latents. arXiv:2606.23085, 2026.
+\bibitem{armbench} Chaitanya Mitash et al. ARMBench: An Object-centric Benchmark Dataset for Robotic Manipulation. arXiv:2303.16382, 2023.
+\bibitem{patchcore} Karsten Roth et al. Towards Total Recall in Industrial Anomaly Detection. CVPR, 2022.
+\bibitem{actprobe} Bingjia Huang et al. ActProbe: Action-Space Probe for Early Failure Detection of Generative Robot Policies. arXiv:2606.08508, 2026.
+\bibitem{vlafail} Florian Seligmann et al. VLA-FAIL: Efficient Task Failure Detection for Finetuned Vision-Language-Action Models. arXiv:2606.21386, 2026.
+\bibitem{armor} Carl Qi et al. Self-Refining Vision Language Model for Robotic Failure Detection and Reasoning. arXiv:2602.12405, 2026.
+\end{thebibliography}
+\endgroup
+
+\end{document}

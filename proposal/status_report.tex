@@ -1,0 +1,158 @@
+\documentclass{article}
+
+\usepackage[final]{fri_rl_2026}
+
+\title{Status Update: Spotting the Moment a Robot Fails\\ on OopsieData}
+
+\author{%
+  Annie Li, Phoebe Wang, and Hiya Vyas\\
+  The University of Texas at Austin
+}
+
+% Notes for us (these lines don't show up in the PDF):
+% - Everything marked TODO in red still needs a real number before we send this.
+% - Read it out loud and change anything that doesn't sound like us.
+
+\begin{document}
+\maketitle
+
+\section{What we are trying to do}\label{sec:goal}
+A robot can keep going after an attempt has already failed. In our oven videos, the door never opens but the arm keeps moving around for the rest of the attempt. We want to find the picture in a recorded robot video where the attempt starts to fail, using only the camera.
+
+Our setup has three parts. First, a frozen R3M model~\citep{r3m} turns each picture into 2{,}048 numbers. We don't train R3M. Second, a small network that we train, which we call a head, turns those numbers into one score between 0 and 1 for each picture. The score should be high when the attempt is going well. Third, a fixed rule, which we call the alarm, reads the scores of one attempt in order. It fires at the first picture where the score has fallen a set amount below the highest score so far and stays down for a few pictures. The picture where the alarm fires is our guess for where the attempt failed.
+
+The question we are asking is which way of training the head makes its score drop when an attempt fails. We train several heads that are the same except for their training signal. They all use the same R3M numbers and the same alarm, so if one head's alarm fires earlier than another's, the training signal is the reason.
+
+\section{What we changed after your feedback}\label{sec:changes}
+\begin{itemize}
+\item \textbf{The alarm.} It is defined in Section~\ref{sec:goal}. The settings we try are a drop of 0.05, 0.10, or 0.20 and a stay-down length of 2, 3, or 4 pictures. If the alarm never fires and the last score is below 0.5, it fires at the last picture. We pick the setting that gives about 10\% false alarms on successes the head never trained on, and we lock it before we look at any test failures.
+
+\item \textbf{The score drop.} In the proposal, ``score drop'' meant a drop in our own head's score, which is what makes the alarm fire. Robometer also reads failure from a drop in its progress score~\citep{robometer}. That is why we compare against it, but the drop we test is in our heads.
+
+\item \textbf{Robometer's numbers.} They come from Table III of the Robometer paper, on LIBERO-90. VOC is the correlation between the predicted progress at each frame and how far into the video that frame is, so 1 means the score rises steadily through a successful video. Kendall's $\tau$ checks whether the model orders failed, suboptimal, and successful attempts at the same task from worst to best. The Robometer version trained with failed data gets VOC 0.98 and $\tau$ 0.92. When the authors replaced the pretrained vision-language backbone with an architecture based on ReWiND, it dropped to VOC 0.48 and $\tau$ $-0.14$. We cited this to say that the same losses on a different model don't automatically work as well. Our heads are much smaller than Robometer, so this is a real risk for us, but they do sit on R3M, which is already pretrained.
+
+\item \textbf{``Trajectories share the scene until the failure.''} We meant something narrower than what we wrote. In a matched pair, the success and the failure start from the same setup, so their first pictures look almost the same. They start to look different once the failed attempt goes wrong. In week 2 we measured the average pixel difference (0 to 255) between matched pairs. Oven pairs differed by 4.7 to 7.4 on the first 3 of the 16 pictures and by 6.4 to 14.2 on the last 3. Cup pairs differed by 5.4 to 11.9 early and by 14.1 to 25.1 late. Section~\ref{sec:results} has the same check on the R3M numbers.
+
+\item \textbf{Why several heads.} Each head changes one thing about how the score is trained. Head A learns progress from successes. Head B adds a ranking signal: a success should score higher than a failure. Head C adds a plain success or failure label. Head D isn't trained. It scores a picture by how close it is to pictures from successful attempts~\citep{patchcore}. If Head D's alarm fires as early as Head B's, then looking different from a success is enough and the ranking signal isn't needed.
+
+\item \textbf{Why 16 pictures.} Attempts have very different lengths. An oven success can be 77 frames long and a failure 400. If we used every frame, a head could learn that a long video means failure. Taking 16 evenly spaced pictures from every attempt makes them all the same length to the head. It also keeps the R3M step small: 400 attempts times 16 pictures is 6{,}400 pictures.
+
+\item \textbf{Head A should use the failures.} We now train two versions. A1 is the original: target $t/15$ on picture $t$ of each success, and nothing on failures. A2 also uses the failures: same targets on successes, plus a target of 0 on the last picture of each failure, since a failed attempt didn't finish. A2 only uses the label we already have, so it doesn't need to know when the failure started. We want to know if A2 is what you had in mind (Section~\ref{sec:questions}).
+
+\item \textbf{Head C's ``episode mean.''} This is the average of the 16 scores the head gives one attempt. Head C puts a success or failure loss on that average.
+
+\item \textbf{The Evidence section.} Our claim in one sentence: a head trained with the ranking signal (Head B) fires its alarm earlier on failed attempts than a head trained only on progress (Head A). We test it by comparing the picture where each head's alarm fires on the same test failures, with both alarms set to about 10\% false alarms on successes. If Head B isn't at least 2 pictures earlier than Head A, and before the last 3 pictures, the claim is wrong.
+
+\item \textbf{Why 15{,}000 episodes.} We don't need that many. We use 400 episodes from two tasks, described in Section~\ref{sec:done}.
+% TODO: say where 15,000 came from, or just keep this one line.
+
+\item \textbf{Work plan and compute.} Sections~\ref{sec:plan} and~\ref{sec:compute} have checkpoints, backup plans, and measured run times.
+\end{itemize}
+
+\section{What we've done so far}\label{sec:done}
+\textbf{Data (week 1).} We use our local copy of OopsieData v0.1~\citep{oopsiedata} and picked two tasks that use different skills on different robots:
+
+\begin{center}
+\begin{tabular}{lcccc}
+\hline
+Task & Episodes & Successes & Failures & Camera we use \\
+\hline
+Araya, ``Open the oven'' & 200 & 52 & 148 & table view \\
+Harvard EML, ``Stack and pack the cups'' & 200 & 74 & 126 & base view \\
+\hline
+\end{tabular}
+\end{center}
+
+The success or failure mark was already inside each episode file. The files don't say at which picture a failure started.
+
+\textbf{Splits (week 2).} We split by recording session, so attempts from the same sitting are all in training or all in testing. The oven has two sessions: one is training (34 successes, 66 failures) and one is testing (18 successes, 82 failures). The cups have 16 sessions: 13 are training (56 successes, 96 failures) and 3 are testing (18 successes, 30 failures).
+
+\textbf{Loader (week 2).} \texttt{week2/loader.py} reads the success mark, opens the main camera video, counts the frames, and keeps 16 spread from the first frame to the last. We ran it on 15 oven and 15 cup attempts and looked at the start, middle, and end of each.
+
+\textbf{Things we noticed while watching:}
+\begin{itemize}
+\item In the oven task, 91 of the 148 failures ran until the 400-step time limit, but only 2 of the 52 successes did. Most oven failures are the robot never getting the door open, not one clear mistake. This will make the start of the failure hard to mark by hand.
+\item In the cup task, a failure often shows a cup tipped over in the middle, but the last picture can look normal because the arms go back home.
+\item All 126 cup failures have the note ``Imported from the source rollout marker; taxonomy pending human review.'' We think the pending part is the taxonomy (what kind of failure it was), which is also empty for the oven failures, and not the success or failure mark itself. The mark matches the \texttt{-fail-} in all 126 file names.
+\end{itemize}
+
+\textbf{R3M cache (week 3).} We ran R3M on all 400 attempts on the laptop CPU. We timed 8 attempts first: reading the video took about 1 second per attempt and R3M about 2.4 seconds, so we expected 20 to 35 minutes for all 400. The full run took 20 minutes with no attempts skipped: about 1 second to read each video and 2 seconds for R3M. We also found a mistake in our week 1 test. R3M only resizes a picture if you tell it to, and the cup pictures are 640 by 480, so they went in at full size. The new script resizes every picture to 224 by 224 and keeps the whole picture.
+
+\section{Results so far}\label{sec:results}
+\textbf{Do a success and a failure drift apart in R3M numbers?} Our heads only see R3M numbers, so we checked the week 2 pixel result again on those. For each pair we took 1 minus the cosine similarity of the two R3M vectors at each of the 16 pictures (0 means identical). Raw R3M vectors all point in almost the same direction, so the raw distances were tiny (0.001 to 0.016). We subtracted each task's average vector first. To see what normal drift looks like, we also compared two successes from the same session. For the oven these are two different starting setups. The script is \texttt{week3/check\_r3m\_pairs.py}.
+
+\begin{center}
+\begin{tabular}{llcccc}
+\hline
+Task & Pair & Pairs & First 3 & Last 3 & Last 3 further apart \\
+\hline
+Oven & success vs failure & 32 & 0.14 & 0.33 & 88\% \\
+Oven & success vs success & 26 & 0.57 & 0.52 & 38\% \\
+Cups & success vs failure & 50 & 0.37 & 0.87 & 88\% \\
+Cups & success vs success & 35 & 0.16 & 0.41 & 89\% \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Oven.} A matched success and failure are much closer to each other than two successes from different setups (0.14 against 0.57), so starting from the same setup matters. They only drift apart in the last four pictures: 0.19, 0.27, 0.34, and 0.37 at pictures 12 to 15. That is when the door opens in a success. This could be a problem for us. If the oven failure only shows up in pictures 12 to 15, our rule that the alarm has to fire before the last 3 pictures may be close to impossible on the oven.
+
+\textbf{Cups.} Two successes also drift apart during the attempt (0.16 early, 0.41 late), so drifting apart doesn't mean failure by itself. The clearest difference is the last picture: 1.16 for a success and a failure, but 0.07 for two successes. Even when the arms go back home, a failure doesn't end with the cups packed. In the middle of the attempt, a success and a failure are about 1.5 to 2 times as far apart as two successes.
+
+\textcolor{red}{TODO: add the first head results here if we have them before we send this (baselines, Head D, A1 and A2, mean score over the 16 pictures for test successes and test failures).}
+
+\section{Plan for the rest of the project}\label{sec:plan}
+Training a head now takes seconds on a laptop, so we moved Heads B and C a week earlier. That gives us week 5 to fix whatever doesn't work.
+
+\begin{center}
+\small
+\begin{tabular}{p{0.07\linewidth}p{0.4\linewidth}p{0.43\linewidth}}
+\hline
+Week & Checkpoint & If it goes wrong \\
+\hline
+3 & R3M cache for all 400 attempts. Baselines, Head D, A1 and A2 on both tasks. Start of failure marked by hand on 40 test failures. Robometer test job on TACC for 8 attempts. & If Robometer won't install, keep going on everything else, since nothing else needs TACC. If A1 already fires before the last 3 pictures, our claim is in doubt and we report that. \\
+4 & Robometer on all 400 attempts. Heads B and C, 3 seeds each. Alarm setting locked. First answer to A versus B. & If Robometer still doesn't run, drop it and say so. It's only a comparison. \\
+5 & Train on one task and test on the other. Check alarm pictures against the hand-marked starts. & If the two people marking disagree by more than 2 pictures on more than 3 of the 10 shared attempts, we don't use the hand marks and report alarm pictures only. \\
+6 & Report and presentation. No new training. & \\
+\hline
+\end{tabular}
+\end{center}
+
+If we fall behind, we drop things in this order: training on one task and testing on the other, Robometer, Head C, the hand-marked starts. The smallest experiment that can still prove our claim wrong is A1 against B on both tasks.
+
+\section{Compute}\label{sec:compute}
+We were wrong about compute in the proposal. The heavy parts are much smaller than we thought:
+\begin{itemize}
+\item \textbf{R3M:} 20 minutes on the laptop CPU for all 400 attempts, done once. The saved file is 52\,MB.
+\item \textbf{Heads:} each head trains on 400 times 16 saved R3M vectors, which takes seconds on the laptop. We can retrain as many times as we need while we change the setup.
+\item \textbf{Robometer:} this is the only part that needs a GPU, so it is the only part on TACC. We will run it once, inference only, on one A100. We will measure the time per attempt with an 8-attempt test job before the full run.
+\end{itemize}
+If TACC becomes a problem, only the Robometer comparison is affected.
+
+\section{Questions for you}\label{sec:questions}
+\begin{enumerate}
+\item Is A2 (a target of 0 on the last picture of each failure) what you meant by Head A using the failures, or did you have something else in mind?
+\item Is it okay to use the cup failure marks that came from the source rollout marker?
+\item Robometer was trained on 8 frames per attempt. Should we give it the same 16 pictures our heads see, or 8?
+\item On the oven, a success and a failure only look different in the last 4 of the 16 pictures. Should we keep the rule that the alarm has to fire before the last 3 pictures for the oven, or change how we pick the pictures?
+\end{enumerate}
+
+\section{AI statement}
+% TODO: make sure this says exactly what we did.
+We used Claude to help plan this week's work, write and time the week 3 scripts, and write a first draft of this update. We checked the numbers and rewrote the draft ourselves.
+
+\begingroup
+\scriptsize
+\raggedright
+\setlength{\parskip}{0pt}
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\bibsep}{0pt}
+\begin{thebibliography}{4}
+\bibitem{oopsiedata} Oopsie Data. OopsieData. \url{https://oopsie-data.com/}, 2026.
+\bibitem{r3m} Nair et~al. R3M. arXiv:2203.12601, 2022.
+\bibitem{robometer} Liang et~al. Robometer. arXiv:2603.02115, 2026.
+\bibitem{patchcore} Roth et~al. PatchCore. CVPR, 2022.
+\end{thebibliography}
+\endgroup
+
+\end{document}

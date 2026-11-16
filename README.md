@@ -1,4 +1,4 @@
-﻿# Spotting the moment a robot fails on OopsieData
+# Spotting the moment a robot fails on OopsieData
 
 Annie Li, Phoebe Wang, and Hiya Vyas. FRI II Robot Learning, The University of Texas at Austin.
 
