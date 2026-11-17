@@ -9,6 +9,11 @@ Run:   py -3.12 week3/make_onset_sheets.py
 Open:  week3/onset/mark_onsets.html in a browser, pick who you are, and mark your sheets.
 "Download my answers" saves onset_annotator1.csv or onset_annotator2.csv. Put it in
 week3/onset/, then run week3/check_onsets.py.
+
+Next to each failure the page shows a success for comparison: the success whose first
+frame looks most like the failure's first frame to R3M (needs week3/r3m_cache.pt).
+If onset_sheets.csv already exists, the same 40 failures are kept, so marks saved in the
+browser still line up.
 """
 
 import argparse
@@ -26,9 +31,12 @@ TILE_WIDTH = 240
 PAGE_TOP = """<!doctype html>
 <html><head><meta charset="utf-8"><title>Mark where the failure starts</title>
 <style>
-body { font-family: Arial, sans-serif; max-width: 1000px; margin: 24px auto; padding: 0 16px; color: #1a1a1a; }
+body { font-family: Arial, sans-serif; max-width: 1500px; margin: 24px auto; padding: 0 16px; color: #1a1a1a; }
 .item { border-top: 1px solid #ccc; padding: 12px 0; }
-.item img { width: 100%; max-width: 720px; display: block; }
+.pair { display: flex; gap: 12px; flex-wrap: wrap; }
+.pair figure { flex: 1 1 420px; margin: 0; }
+.pair figcaption { font-size: 14px; margin-bottom: 4px; }
+.item img { width: 100%; display: block; }
 .done { background: #f3f8ee; }
 .bar { position: sticky; top: 0; background: #fff; padding: 8px 0; border-bottom: 1px solid #ccc; }
 label { margin-right: 16px; }
@@ -38,6 +46,9 @@ label { margin-right: 16px; }
 of the <b>first frame where you can see the attempt has gone wrong</b>, for example a cup tips over,
 the gripper misses the handle and moves away, or the door stops moving. If there is no clear moment
 (for example the robot just never gets the door open), tick "No clear moment" and say why in the note.</p>
+<p>Next to each failure (left) is a <b>success</b> (right) to compare with, frame by frame: the success whose
+first frame looks most like the failure's. It may not be the exact same setup. You are only marking the
+failure on the left.</p>
 <p>On the sheets marked <b>both</b>, the other annotator marks the same attempt. Don't look at each
 other's answers. Your answers stay in this browser until you press "Download my answers".</p>
 <div class="bar">I am:
@@ -127,6 +138,32 @@ def sheet_image(frames):
     return sheet
 
 
+def reference_successes(rows, failure_ids, repo):
+    """For each failure, the success whose first frame is closest to the failure's first
+    frame in R3M space (task average taken out, cosine distance).
+
+    Not the oven's matched pair: some pair successes start with the door already open,
+    which makes a poor reference.
+    """
+    import torch
+
+    cache = torch.load(os.path.join(repo, "week3", "r3m_cache.pt"), weights_only=False)
+    position = {ep["episode_id"]: i for i, ep in enumerate(cache["episodes"])}
+    first = cache["embedding"][:, 0, :].float()
+    by_id = {row["episode_id"]: row for row in rows}
+    picks = {}
+    for episode_id in failure_ids:
+        failure = by_id[episode_id]
+        successes = [row for row in rows if row["task"] == failure["task"] and row["label"] == "success"]
+        task_ids = [position[row["episode_id"]] for row in rows if row["task"] == failure["task"]]
+        centered = first - first[task_ids].mean(dim=0)
+        target = torch.nn.functional.normalize(centered[position[episode_id]], dim=0)
+        scored = [(1 - float(torch.dot(target, torch.nn.functional.normalize(centered[position[row["episode_id"]]], dim=0))),
+                   row["episode_id"], row) for row in successes]
+        picks[episode_id] = (min(scored)[2], "closest-looking start")
+    return picks
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", default=os.path.dirname(HERE), help="repo folder that holds week2/")
@@ -139,28 +176,46 @@ def main():
 
     with open(os.path.join(args.repo, "week2", "episode_index.csv"), encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
+    by_id = {row["episode_id"]: row for row in rows}
 
     out = os.path.join(HERE, "onset")
     sheets = os.path.join(out, "sheets")
     os.makedirs(sheets, exist_ok=True)
-    rng = random.Random(0)
+    table_path = os.path.join(out, "onset_sheets.csv")
     table = []
-    for task in ("open_oven", "stack_cups"):
-        failures = [row for row in rows if row["task"] == task and row["label"] == "failure" and row["split"] == "test"]
-        chosen = rng.sample(failures, min(args.per_task, len(failures)))
-        for number, row in enumerate(chosen):
-            if number < args.both_per_task:
-                who = "both"
-            else:
-                who = "annotator1" if number % 2 == 0 else "annotator2"
-            episode = load_episode(row["h5_path"], task)
-            # Short names; the episode id is in onset_sheets.csv next to the sheet name.
-            name = "%s_%02d.jpg" % ("oven" if task == "open_oven" else "cups", number + 1)
-            sheet_image(episode["frames"]).save(os.path.join(sheets, name), quality=90)
-            table.append({"task": task, "episode_id": row["episode_id"], "who_labels": who, "sheet": "sheets/" + name})
-            print("%s %s %s" % (task, who, row["episode_id"]))
+    if os.path.exists(table_path):
+        # Keep the same 40 failures and sheet names, so marks already saved in the browser still match.
+        with open(table_path, encoding="utf-8") as f:
+            table = [{key: row[key] for key in ("task", "episode_id", "who_labels", "sheet")} for row in csv.DictReader(f)]
+        print("Keeping the %d failures in onset_sheets.csv" % len(table))
+    else:
+        rng = random.Random(0)
+        for task in ("open_oven", "stack_cups"):
+            failures = [row for row in rows if row["task"] == task and row["label"] == "failure" and row["split"] == "test"]
+            chosen = rng.sample(failures, min(args.per_task, len(failures)))
+            for number, row in enumerate(chosen):
+                if number < args.both_per_task:
+                    who = "both"
+                else:
+                    who = "annotator1" if number % 2 == 0 else "annotator2"
+                # Short names; the episode id is in onset_sheets.csv next to the sheet name.
+                name = "%s_%02d.jpg" % ("oven" if task == "open_oven" else "cups", number + 1)
+                table.append({"task": task, "episode_id": row["episode_id"], "who_labels": who, "sheet": "sheets/" + name})
 
-    with open(os.path.join(out, "onset_sheets.csv"), "w", newline="", encoding="utf-8") as f:
+    picks = reference_successes(rows, [row["episode_id"] for row in table], args.repo)
+    for row in table:
+        failure_sheet = os.path.join(out, row["sheet"])
+        if not os.path.exists(failure_sheet):
+            sheet_image(load_episode(by_id[row["episode_id"]]["h5_path"], row["task"])["frames"]).save(failure_sheet, quality=90)
+        success, match = picks[row["episode_id"]]
+        row["success_sheet"] = row["sheet"].replace(".jpg", "_success.jpg")
+        row["success_episode_id"] = success["episode_id"]
+        row["success_match"] = match
+        frames = load_episode(success["h5_path"], row["task"])["frames"]
+        sheet_image(frames).save(os.path.join(out, row["success_sheet"]), quality=90)
+        print("%s %s  success %s (%s)" % (row["sheet"], row["who_labels"], success["episode_id"][-24:], match))
+
+    with open(table_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(table[0]))
         writer.writeheader()
         writer.writerows(table)
@@ -172,7 +227,11 @@ def main():
             ident, row["task"], row["who_labels"]))
         parts.append("<h3>%s (%s)</h3><p>%s<br>marked by: %s</p>" % (
             os.path.basename(row["sheet"]), row["task"], ident, row["who_labels"]))
-        parts.append('<img src="%s" loading="lazy" alt="16 frames from %s">' % (row["sheet"], ident))
+        caption = "A success to compare with (its first frame looks most like this failure's)"
+        parts.append('<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption>'
+                     '<img src="%s" loading="lazy" alt="16 frames from %s"></figure>'
+                     '<figure><figcaption>%s</figcaption><img src="%s" loading="lazy" alt="16 frames from a success">'
+                     '</figure></div>' % (row["sheet"], ident, caption, row["success_sheet"]))
         parts.append('<p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label>'
                      '<label><input class="none" type="checkbox"> No clear moment</label>'
                      '<input class="note" type="text" size="40" placeholder="note"> '

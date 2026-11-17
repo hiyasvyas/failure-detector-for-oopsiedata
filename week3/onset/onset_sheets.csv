@@ -1,41 +1,41 @@
-task,episode_id,who_labels,sheet
-open_oven,20260803_211025,both,sheets/oven_01.jpg
-open_oven,20260803_211049,both,sheets/oven_02.jpg
-open_oven,20260803_210436,both,sheets/oven_03.jpg
-open_oven,20260803_210822,both,sheets/oven_04.jpg
-open_oven,20260803_211239,both,sheets/oven_05.jpg
-open_oven,20260803_211216,annotator2,sheets/oven_06.jpg
-open_oven,20260803_211035,annotator1,sheets/oven_07.jpg
-open_oven,20260803_210908,annotator2,sheets/oven_08.jpg
-open_oven,20260803_211206,annotator1,sheets/oven_09.jpg
-open_oven,20260803_210957,annotator2,sheets/oven_10.jpg
-open_oven,20260803_210736,annotator1,sheets/oven_11.jpg
-open_oven,20260803_211232,annotator2,sheets/oven_12.jpg
-open_oven,20260803_210616,annotator1,sheets/oven_13.jpg
-open_oven,20260803_210859,annotator2,sheets/oven_14.jpg
-open_oven,20260803_211313,annotator1,sheets/oven_15.jpg
-open_oven,20260803_210536,annotator2,sheets/oven_16.jpg
-open_oven,20260803_210813,annotator1,sheets/oven_17.jpg
-open_oven,20260803_210624,annotator2,sheets/oven_18.jpg
-open_oven,20260803_210913,annotator1,sheets/oven_19.jpg
-open_oven,20260803_210443,annotator2,sheets/oven_20.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b,both,sheets/cups_01.jpg
-stack_cups,bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928,both,sheets/cups_02.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b,both,sheets/cups_03.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b,both,sheets/cups_04.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61,both,sheets/cups_05.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d,annotator2,sheets/cups_06.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd,annotator1,sheets/cups_07.jpg
-stack_cups,bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34,annotator2,sheets/cups_08.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce,annotator1,sheets/cups_09.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12,annotator2,sheets/cups_10.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194,annotator1,sheets/cups_11.jpg
-stack_cups,bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10,annotator2,sheets/cups_12.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c,annotator1,sheets/cups_13.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d,annotator2,sheets/cups_14.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948,annotator1,sheets/cups_15.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37,annotator2,sheets/cups_16.jpg
-stack_cups,bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46,annotator1,sheets/cups_17.jpg
-stack_cups,bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62,annotator2,sheets/cups_18.jpg
-stack_cups,bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345,annotator1,sheets/cups_19.jpg
-stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc,annotator2,sheets/cups_20.jpg
+task,episode_id,who_labels,sheet,success_sheet,success_episode_id,success_match
+open_oven,20260803_211025,both,sheets/oven_01.jpg,sheets/oven_01_success.jpg,20260803_205552,closest-looking start
+open_oven,20260803_211049,both,sheets/oven_02.jpg,sheets/oven_02_success.jpg,20260803_210516,closest-looking start
+open_oven,20260803_210436,both,sheets/oven_03.jpg,sheets/oven_03_success.jpg,20260803_210516,closest-looking start
+open_oven,20260803_210822,both,sheets/oven_04.jpg,sheets/oven_04_success.jpg,20260803_210643,closest-looking start
+open_oven,20260803_211239,both,sheets/oven_05.jpg,sheets/oven_05_success.jpg,20260803_211446,closest-looking start
+open_oven,20260803_211216,annotator2,sheets/oven_06.jpg,sheets/oven_06_success.jpg,20260803_211322,closest-looking start
+open_oven,20260803_211035,annotator1,sheets/oven_07.jpg,sheets/oven_07_success.jpg,20260803_210848,closest-looking start
+open_oven,20260803_210908,annotator2,sheets/oven_08.jpg,sheets/oven_08_success.jpg,20260803_205524,closest-looking start
+open_oven,20260803_211206,annotator1,sheets/oven_09.jpg,sheets/oven_09_success.jpg,20260803_211446,closest-looking start
+open_oven,20260803_210957,annotator2,sheets/oven_10.jpg,sheets/oven_10_success.jpg,20260803_210643,closest-looking start
+open_oven,20260803_210736,annotator1,sheets/oven_11.jpg,sheets/oven_11_success.jpg,20260803_210848,closest-looking start
+open_oven,20260803_211232,annotator2,sheets/oven_12.jpg,sheets/oven_12_success.jpg,20260803_211539,closest-looking start
+open_oven,20260803_210616,annotator1,sheets/oven_13.jpg,sheets/oven_13_success.jpg,20260803_205709,closest-looking start
+open_oven,20260803_210859,annotator2,sheets/oven_14.jpg,sheets/oven_14_success.jpg,20260803_210848,closest-looking start
+open_oven,20260803_211313,annotator1,sheets/oven_15.jpg,sheets/oven_15_success.jpg,20260803_210028,closest-looking start
+open_oven,20260803_210536,annotator2,sheets/oven_16.jpg,sheets/oven_16_success.jpg,20260803_205557,closest-looking start
+open_oven,20260803_210813,annotator1,sheets/oven_17.jpg,sheets/oven_17_success.jpg,20260803_210643,closest-looking start
+open_oven,20260803_210624,annotator2,sheets/oven_18.jpg,sheets/oven_18_success.jpg,20260803_205524,closest-looking start
+open_oven,20260803_210913,annotator1,sheets/oven_19.jpg,sheets/oven_19_success.jpg,20260803_205554,closest-looking start
+open_oven,20260803_210443,annotator2,sheets/oven_20.jpg,sheets/oven_20_success.jpg,20260803_210516,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b,both,sheets/cups_01.jpg,sheets/cups_01_success.jpg,bsp-stack-unstack-bspline-1-2-20260125t011734834906-7c898725df,closest-looking start
+stack_cups,bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928,both,sheets/cups_02.jpg,sheets/cups_02_success.jpg,bsp-speeding-stack-pack-cups-20260120t013013859833-18ad5bab7f,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b,both,sheets/cups_03.jpg,sheets/cups_03_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t033521050962-6d6d99dbe3,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b,both,sheets/cups_04.jpg,sheets/cups_04_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t044659986624-55d4b99aa5,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61,both,sheets/cups_05.jpg,sheets/cups_05_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t043620921241-21fcb81cc8,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d,annotator2,sheets/cups_06.jpg,sheets/cups_06_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t050413690291-919312b047,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd,annotator1,sheets/cups_07.jpg,sheets/cups_07_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t050539529637-76d701f303,closest-looking start
+stack_cups,bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34,annotator2,sheets/cups_08.jpg,sheets/cups_08_success.jpg,bsp-speeding-stack-pack-cups-20260120t013059409610-d0d7764606,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce,annotator1,sheets/cups_09.jpg,sheets/cups_09_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t023201775289-f1ef15be68,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12,annotator2,sheets/cups_10.jpg,sheets/cups_10_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t032830504823-befa851e49,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194,annotator1,sheets/cups_11.jpg,sheets/cups_11_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t043948179703-508269cf53,closest-looking start
+stack_cups,bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10,annotator2,sheets/cups_12.jpg,sheets/cups_12_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t033231413251-e1edf1ffa2,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c,annotator1,sheets/cups_13.jpg,sheets/cups_13_success.jpg,bsp-stack-unstack-bspline-1-2-20260125t012013152743-04996f17b5,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d,annotator2,sheets/cups_14.jpg,sheets/cups_14_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t043912230724-a7944cd9ca,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948,annotator1,sheets/cups_15.jpg,sheets/cups_15_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t044734218468-3c113b777c,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37,annotator2,sheets/cups_16.jpg,sheets/cups_16_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t030334137112-225c23979b,closest-looking start
+stack_cups,bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46,annotator1,sheets/cups_17.jpg,sheets/cups_17_success.jpg,bsp-speeding-stack-pack-cups-20260120t013444078738-9c4973a5a9,closest-looking start
+stack_cups,bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62,annotator2,sheets/cups_18.jpg,sheets/cups_18_success.jpg,bsp-stack-unstack-bspline-1-2-20260124t033231413251-e1edf1ffa2,closest-looking start
+stack_cups,bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345,annotator1,sheets/cups_19.jpg,sheets/cups_19_success.jpg,bsp-speeding-stack-pack-cups-20260120t012632126943-6f45db34f0,closest-looking start
+stack_cups,bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc,annotator2,sheets/cups_20.jpg,sheets/cups_20_success.jpg,bsp-stack-unstack-bspline-1-2-20260125t011605969402-3340d3f605,closest-looking start

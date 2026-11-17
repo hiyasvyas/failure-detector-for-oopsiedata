@@ -1,9 +1,12 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><title>Mark where the failure starts</title>
 <style>
-body { font-family: Arial, sans-serif; max-width: 1000px; margin: 24px auto; padding: 0 16px; color: #1a1a1a; }
+body { font-family: Arial, sans-serif; max-width: 1500px; margin: 24px auto; padding: 0 16px; color: #1a1a1a; }
 .item { border-top: 1px solid #ccc; padding: 12px 0; }
-.item img { width: 100%; max-width: 720px; display: block; }
+.pair { display: flex; gap: 12px; flex-wrap: wrap; }
+.pair figure { flex: 1 1 420px; margin: 0; }
+.pair figcaption { font-size: 14px; margin-bottom: 4px; }
+.item img { width: 100%; display: block; }
 .done { background: #f3f8ee; }
 .bar { position: sticky; top: 0; background: #fff; padding: 8px 0; border-bottom: 1px solid #ccc; }
 label { margin-right: 16px; }
@@ -13,6 +16,9 @@ label { margin-right: 16px; }
 of the <b>first frame where you can see the attempt has gone wrong</b>, for example a cup tips over,
 the gripper misses the handle and moves away, or the door stops moving. If there is no clear moment
 (for example the robot just never gets the door open), tick "No clear moment" and say why in the note.</p>
+<p>Next to each failure (left) is a <b>success</b> (right) to compare with, frame by frame: the success whose
+first frame looks most like the failure's. It may not be the exact same setup. You are only marking the
+failure on the left.</p>
 <p>On the sheets marked <b>both</b>, the other annotator marks the same attempt. Don't look at each
 other's answers. Your answers stay in this browser until you press "Download my answers".</p>
 <div class="bar">I am:
@@ -23,202 +29,202 @@ other's answers. Your answers stay in this browser until you press "Download my 
 
 <div class="item" data-id="20260803_211025" data-task="open_oven" data-who="both" style="display:none">
 <h3>oven_01.jpg (open_oven)</h3><p>20260803_211025<br>marked by: both</p>
-<img src="sheets/oven_01.jpg" loading="lazy" alt="16 frames from 20260803_211025">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_01.jpg" loading="lazy" alt="16 frames from 20260803_211025"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_01_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_211049" data-task="open_oven" data-who="both" style="display:none">
 <h3>oven_02.jpg (open_oven)</h3><p>20260803_211049<br>marked by: both</p>
-<img src="sheets/oven_02.jpg" loading="lazy" alt="16 frames from 20260803_211049">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_02.jpg" loading="lazy" alt="16 frames from 20260803_211049"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_02_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210436" data-task="open_oven" data-who="both" style="display:none">
 <h3>oven_03.jpg (open_oven)</h3><p>20260803_210436<br>marked by: both</p>
-<img src="sheets/oven_03.jpg" loading="lazy" alt="16 frames from 20260803_210436">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_03.jpg" loading="lazy" alt="16 frames from 20260803_210436"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_03_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210822" data-task="open_oven" data-who="both" style="display:none">
 <h3>oven_04.jpg (open_oven)</h3><p>20260803_210822<br>marked by: both</p>
-<img src="sheets/oven_04.jpg" loading="lazy" alt="16 frames from 20260803_210822">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_04.jpg" loading="lazy" alt="16 frames from 20260803_210822"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_04_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_211239" data-task="open_oven" data-who="both" style="display:none">
 <h3>oven_05.jpg (open_oven)</h3><p>20260803_211239<br>marked by: both</p>
-<img src="sheets/oven_05.jpg" loading="lazy" alt="16 frames from 20260803_211239">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_05.jpg" loading="lazy" alt="16 frames from 20260803_211239"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_05_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_211216" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_06.jpg (open_oven)</h3><p>20260803_211216<br>marked by: annotator2</p>
-<img src="sheets/oven_06.jpg" loading="lazy" alt="16 frames from 20260803_211216">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_06.jpg" loading="lazy" alt="16 frames from 20260803_211216"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_06_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_211035" data-task="open_oven" data-who="annotator1" style="display:none">
 <h3>oven_07.jpg (open_oven)</h3><p>20260803_211035<br>marked by: annotator1</p>
-<img src="sheets/oven_07.jpg" loading="lazy" alt="16 frames from 20260803_211035">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_07.jpg" loading="lazy" alt="16 frames from 20260803_211035"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_07_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210908" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_08.jpg (open_oven)</h3><p>20260803_210908<br>marked by: annotator2</p>
-<img src="sheets/oven_08.jpg" loading="lazy" alt="16 frames from 20260803_210908">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_08.jpg" loading="lazy" alt="16 frames from 20260803_210908"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_08_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_211206" data-task="open_oven" data-who="annotator1" style="display:none">
 <h3>oven_09.jpg (open_oven)</h3><p>20260803_211206<br>marked by: annotator1</p>
-<img src="sheets/oven_09.jpg" loading="lazy" alt="16 frames from 20260803_211206">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_09.jpg" loading="lazy" alt="16 frames from 20260803_211206"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_09_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210957" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_10.jpg (open_oven)</h3><p>20260803_210957<br>marked by: annotator2</p>
-<img src="sheets/oven_10.jpg" loading="lazy" alt="16 frames from 20260803_210957">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_10.jpg" loading="lazy" alt="16 frames from 20260803_210957"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_10_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210736" data-task="open_oven" data-who="annotator1" style="display:none">
 <h3>oven_11.jpg (open_oven)</h3><p>20260803_210736<br>marked by: annotator1</p>
-<img src="sheets/oven_11.jpg" loading="lazy" alt="16 frames from 20260803_210736">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_11.jpg" loading="lazy" alt="16 frames from 20260803_210736"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_11_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_211232" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_12.jpg (open_oven)</h3><p>20260803_211232<br>marked by: annotator2</p>
-<img src="sheets/oven_12.jpg" loading="lazy" alt="16 frames from 20260803_211232">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_12.jpg" loading="lazy" alt="16 frames from 20260803_211232"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_12_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210616" data-task="open_oven" data-who="annotator1" style="display:none">
 <h3>oven_13.jpg (open_oven)</h3><p>20260803_210616<br>marked by: annotator1</p>
-<img src="sheets/oven_13.jpg" loading="lazy" alt="16 frames from 20260803_210616">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_13.jpg" loading="lazy" alt="16 frames from 20260803_210616"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_13_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210859" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_14.jpg (open_oven)</h3><p>20260803_210859<br>marked by: annotator2</p>
-<img src="sheets/oven_14.jpg" loading="lazy" alt="16 frames from 20260803_210859">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_14.jpg" loading="lazy" alt="16 frames from 20260803_210859"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_14_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_211313" data-task="open_oven" data-who="annotator1" style="display:none">
 <h3>oven_15.jpg (open_oven)</h3><p>20260803_211313<br>marked by: annotator1</p>
-<img src="sheets/oven_15.jpg" loading="lazy" alt="16 frames from 20260803_211313">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_15.jpg" loading="lazy" alt="16 frames from 20260803_211313"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_15_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210536" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_16.jpg (open_oven)</h3><p>20260803_210536<br>marked by: annotator2</p>
-<img src="sheets/oven_16.jpg" loading="lazy" alt="16 frames from 20260803_210536">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_16.jpg" loading="lazy" alt="16 frames from 20260803_210536"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_16_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210813" data-task="open_oven" data-who="annotator1" style="display:none">
 <h3>oven_17.jpg (open_oven)</h3><p>20260803_210813<br>marked by: annotator1</p>
-<img src="sheets/oven_17.jpg" loading="lazy" alt="16 frames from 20260803_210813">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_17.jpg" loading="lazy" alt="16 frames from 20260803_210813"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_17_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210624" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_18.jpg (open_oven)</h3><p>20260803_210624<br>marked by: annotator2</p>
-<img src="sheets/oven_18.jpg" loading="lazy" alt="16 frames from 20260803_210624">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_18.jpg" loading="lazy" alt="16 frames from 20260803_210624"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_18_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210913" data-task="open_oven" data-who="annotator1" style="display:none">
 <h3>oven_19.jpg (open_oven)</h3><p>20260803_210913<br>marked by: annotator1</p>
-<img src="sheets/oven_19.jpg" loading="lazy" alt="16 frames from 20260803_210913">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_19.jpg" loading="lazy" alt="16 frames from 20260803_210913"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_19_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="20260803_210443" data-task="open_oven" data-who="annotator2" style="display:none">
 <h3>oven_20.jpg (open_oven)</h3><p>20260803_210443<br>marked by: annotator2</p>
-<img src="sheets/oven_20.jpg" loading="lazy" alt="16 frames from 20260803_210443">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/oven_20.jpg" loading="lazy" alt="16 frames from 20260803_210443"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/oven_20_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b" data-task="stack_cups" data-who="both" style="display:none">
 <h3>cups_01.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b<br>marked by: both</p>
-<img src="sheets/cups_01.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_01.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e4d7857b"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_01_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928" data-task="stack_cups" data-who="both" style="display:none">
 <h3>cups_02.jpg (stack_cups)</h3><p>bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928<br>marked by: both</p>
-<img src="sheets/cups_02.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_02.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41c7f928"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_02_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b" data-task="stack_cups" data-who="both" style="display:none">
 <h3>cups_03.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b<br>marked by: both</p>
-<img src="sheets/cups_03.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_03.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da20f142b"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_03_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b" data-task="stack_cups" data-who="both" style="display:none">
 <h3>cups_04.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b<br>marked by: both</p>
-<img src="sheets/cups_04.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_04.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b039a9eb9b"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_04_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61" data-task="stack_cups" data-who="both" style="display:none">
 <h3>cups_05.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61<br>marked by: both</p>
-<img src="sheets/cups_05.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_05.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19087de61"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_05_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_06.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d<br>marked by: annotator2</p>
-<img src="sheets/cups_06.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_06.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050614548668-fail-569d46201d"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_06_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd" data-task="stack_cups" data-who="annotator1" style="display:none">
 <h3>cups_07.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd<br>marked by: annotator1</p>
-<img src="sheets/cups_07.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_07.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050710572307-fail-ce9e74c1dd"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_07_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_08.jpg (stack_cups)</h3><p>bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34<br>marked by: annotator2</p>
-<img src="sheets/cups_08.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_08.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010523669308-fail-8964658a34"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_08_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce" data-task="stack_cups" data-who="annotator1" style="display:none">
 <h3>cups_09.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce<br>marked by: annotator1</p>
-<img src="sheets/cups_09.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_09.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050333100559-fail-ed70de12ce"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_09_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_10.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12<br>marked by: annotator2</p>
-<img src="sheets/cups_10.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_10.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050444055060-fail-69bd30ea12"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_10_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194" data-task="stack_cups" data-who="annotator1" style="display:none">
 <h3>cups_11.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194<br>marked by: annotator1</p>
-<img src="sheets/cups_11.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_11.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014041838490-fail-43faae2194"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_11_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_12.jpg (stack_cups)</h3><p>bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10<br>marked by: annotator2</p>
-<img src="sheets/cups_12.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_12.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t011111822548-fail-e8edb98f10"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_12_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c" data-task="stack_cups" data-who="annotator1" style="display:none">
 <h3>cups_13.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c<br>marked by: annotator1</p>
-<img src="sheets/cups_13.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_13.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014523114136-fail-bc8273e50c"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_13_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_14.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d<br>marked by: annotator2</p>
-<img src="sheets/cups_14.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_14.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260125t014023923579-fail-c0df80008d"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_14_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948" data-task="stack_cups" data-who="annotator1" style="display:none">
 <h3>cups_15.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948<br>marked by: annotator1</p>
-<img src="sheets/cups_15.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_15.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050508318112-fail-b4a56fe948"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_15_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_16.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37<br>marked by: annotator2</p>
-<img src="sheets/cups_16.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_16.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t051058303857-fail-a349f5ed37"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_16_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46" data-task="stack_cups" data-who="annotator1" style="display:none">
 <h3>cups_17.jpg (stack_cups)</h3><p>bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46<br>marked by: annotator1</p>
-<img src="sheets/cups_17.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_17.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t011229392415-fail-ea93b44c46"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_17_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_18.jpg (stack_cups)</h3><p>bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62<br>marked by: annotator2</p>
-<img src="sheets/cups_18.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_18.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010606825000-fail-61b6c2ee62"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_18_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345" data-task="stack_cups" data-who="annotator1" style="display:none">
 <h3>cups_19.jpg (stack_cups)</h3><p>bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345<br>marked by: annotator1</p>
-<img src="sheets/cups_19.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_19.jpg" loading="lazy" alt="16 frames from bsp-speeding-stack-pack-cups-20260120t010159729471-fail-1b1a3fb345"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_19_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <div class="item" data-id="bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc" data-task="stack_cups" data-who="annotator2" style="display:none">
 <h3>cups_20.jpg (stack_cups)</h3><p>bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc<br>marked by: annotator2</p>
-<img src="sheets/cups_20.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc">
+<div class="pair"><figure><figcaption><b>This failure</b> (mark this one)</figcaption><img src="sheets/cups_20.jpg" loading="lazy" alt="16 frames from bsp-stack-unstack-bspline-1-2-20260124t050638819696-fail-917d4e66dc"></figure><figure><figcaption>A success to compare with (its first frame looks most like this failure's)</figcaption><img src="sheets/cups_20_success.jpg" loading="lazy" alt="16 frames from a success"></figure></div>
 <p><label>First frame where it went wrong: <input class="onset" type="text" size="3"></label><label><input class="none" type="checkbox"> No clear moment</label><input class="note" type="text" size="40" placeholder="note"> <span class="error" style="color:#b00020;font-size:13px"></span></p>
 </div>
 <script>
