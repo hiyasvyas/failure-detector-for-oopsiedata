@@ -4,7 +4,8 @@ Runs on the laptop CPU. Needs week3/r3m_cache.pt (made by cache_r3m.py).
 If week3/label_check/ has CSVs downloaded from the label-check page, cup failures
 marked "looks like a success" or "not sure" are left out.
 If week3/robometer_scores.jsonl exists (from TACC), Robometer goes through the same
-flagging rule as the heads (16 frames only, since Robometer scored the 16-frame set).
+flagging rule as the heads. For an 8- or 32-frame run it reads robometer_scores_8.jsonl
+or robometer_scores_32.jsonl instead (robometer_batch.py --frames N), if there is one.
 
 Run:          py -3.12 week3/run_heads.py
 Quick test:   py -3.12 week3/run_heads.py --seeds 1
@@ -14,7 +15,9 @@ Other frame counts (make the cache first with cache_r3m.py --frames N):
               py -3.12 week3/run_heads.py --frames 32         writes week3/results_frames32/
 Train on one task, test on the other:
               py -3.12 week3/run_heads.py --cross             writes week3/results_cross/
-(--cross and --frames can be used together.)
+The new flagging rule:
+              py -3.12 week3/run_heads.py --rule behind       writes week3/results_behind/
+(--rule, --cross and --frames can be used together, e.g. results_behind_frames8/.)
 
 Writes to week3/results/ (or the folder above):
   results.txt           one table per task, the numbers for the status report
@@ -29,12 +32,21 @@ shrunk from 2,048 to 128 with PCA fit on the training frames):
   C   B, plus a success/failure loss on the mean score, successes and failures weighted equally
   D   no training: how close a frame is to the nearest frame of a training success
 
-The flagging rule, the same for every head:
-  keep the highest score so far; the rule fires once the score has been at least d below
-  it for s frames in a row, and the flagged frame is the frame where that happens.
-  If it never fires but the last score is below 0.5, it flags the last frame.
+The flagging rule, the same for every head (pick it with --rule):
+  drop    (the original rule) keep the highest score so far; the rule fires once the score
+          has been at least d below it for s frames in a row, and the flagged frame is the
+          frame where that happens.
+  behind  (the new rule, for scores that stop rising instead of dropping) the rule fires once
+          the score has been at least d below the average training-success score at the same
+          frame for s frames in a row. The average comes from the cross-fitted scores below,
+          so no success is scored by a head that trained on it.
+  either  whichever of the two fires first.
+  With every rule: if it never fires but the last score is below 0.5, it flags the last
+  frame (the fallback). The results table counts how many flags came from the fallback.
 d and s are picked per head on training attempts the head did not train on (5-fold
 cross-fitting), aiming for 10% false flags on successes, before any test attempt is used.
+When a training success is checked, its own scores are left out of the average it is
+compared with.
 With 16 frames s is 2, 3, or 4. With other frame counts s is scaled so it covers the same
 share of the attempt (8 frames: 1 or 2; 32 frames: 4, 6, or 8).
 
@@ -65,25 +77,45 @@ STAYS_16 = (2, 3, 4)
 TARGET_FALSE_FLAGS = 0.10
 TRAINED_HEADS = ("A1", "A2", "B", "C")
 EARLY_16 = 12  # on the 16-frame scale, flagged at frame 12 or before = before the last 3 frames
+RULES = ("drop", "behind", "either")
+# The names the midterm report uses.
+NAMES = {"A1": "Prog-Base", "A2": "Progress-Zero", "B": "Prog+Ranking", "C": "Prog+Rank+Label",
+         "D": "Distance-Baseline", "Robometer": "Robometer"}
 
 
 # ---------- the flagging rule ----------
 
-def flag_frame(scores, d, s):
-    """The frame where the rule fires, or None if it never fires."""
+def flag_detail(scores, d, s, rule="drop", ref=None):
+    """(flagged frame, how): how is "rule", "fallback", or None when nothing is flagged.
+    ref is the average training-success score at each frame (needed for behind and either)."""
     peak = -float("inf")
-    run = 0
+    run_drop = run_behind = 0
     for t, x in enumerate(scores):
         peak = max(peak, x)
-        if x <= peak - d:
-            run += 1
-            if run == s:
-                return t
-        else:
-            run = 0
+        if rule in ("drop", "either"):
+            run_drop = run_drop + 1 if x <= peak - d else 0
+            if run_drop == s:
+                return t, "rule"
+        if rule in ("behind", "either"):
+            run_behind = run_behind + 1 if x <= ref[t] - d else 0
+            if run_behind == s:
+                return t, "rule"
     if scores[-1] < 0.5:
-        return len(scores) - 1
-    return None
+        return len(scores) - 1, "fallback"
+    return None, None
+
+
+def flag_frame(scores, d, s, rule="drop", ref=None):
+    """The frame where the rule fires, or None if it never fires."""
+    return flag_detail(scores, d, s, rule, ref)[0]
+
+
+def success_reference(success_curves):
+    """Average success score at each frame, and for each success the average without itself."""
+    success_curves = np.asarray(success_curves)
+    total, n = success_curves.sum(0), len(success_curves)
+    leave_one_out = [(total - c) / max(n - 1, 1) for c in success_curves]
+    return total / max(n, 1), leave_one_out
 
 
 def stays_for(frames):
@@ -96,19 +128,26 @@ def to_16(frame, frames):
     return frame * 15 / (frames - 1)
 
 
-def flag_rate(curves, d, s):
+def flag_rate(curves, d, s, rule="drop", refs=None):
+    """Share of curves flagged. refs: one reference curve per curve (or None for the drop rule)."""
     if len(curves) == 0:
         return 0.0
-    return float(np.mean([flag_frame(c, d, s) is not None for c in curves]))
+    refs = refs if refs is not None else [None] * len(curves)
+    return float(np.mean([flag_frame(c, d, s, rule, r) is not None for c, r in zip(curves, refs)]))
 
 
-def choose_setting(success_curves, failure_curves, stays):
-    """Closest to 10% false flags on successes; ties go to the setting that flags more failures."""
+def choose_setting(success_curves, failure_curves, stays, rule="drop"):
+    """Closest to 10% false flags on successes; ties go to the setting that flags more failures.
+    For behind and either, each success is compared with the average of the other successes."""
+    ref, leave_one_out = success_reference(success_curves)
+    success_refs = leave_one_out if rule != "drop" else None
+    failure_refs = [ref] * len(failure_curves) if rule != "drop" else None
     best = None
     for d in DROPS:
         for s in stays:
-            false_flags = flag_rate(success_curves, d, s)
-            key = (round(abs(false_flags - TARGET_FALSE_FLAGS), 6), -flag_rate(failure_curves, d, s))
+            false_flags = flag_rate(success_curves, d, s, rule, success_refs)
+            key = (round(abs(false_flags - TARGET_FALSE_FLAGS), 6),
+                   -flag_rate(failure_curves, d, s, rule, failure_refs))
             if best is None or key < best[0]:
                 best = (key, d, s, false_flags)
     return best[1], best[2], best[3]
@@ -247,8 +286,10 @@ def label_check_drops(keep_unsure):
     return drops, len(answers)
 
 
-def load_robometer():
-    path = os.path.join(HERE, "robometer_scores.jsonl")
+def load_robometer(frames=16):
+    """Robometer's progress scores for this frame count: robometer_scores.jsonl for 16 frames,
+    robometer_scores_<N>.jsonl otherwise (robometer_batch.py --frames N)."""
+    path = os.path.join(HERE, "robometer_scores.jsonl" if frames == 16 else "robometer_scores_%d.jsonl" % frames)
     if not os.path.exists(path):
         return {}
     scores = {}
@@ -259,9 +300,9 @@ def load_robometer():
                 progress = np.array(row["progress"], dtype=np.float32)
                 if len(progress) == 0:
                     continue
-                if len(progress) != 16:
-                    # Put any other number of scores onto our 16 frames.
-                    progress = np.interp(np.linspace(0, 1, 16), np.linspace(0, 1, len(progress)), progress)
+                if len(progress) != frames:
+                    # Put any other number of scores onto our frames.
+                    progress = np.interp(np.linspace(0, 1, frames), np.linspace(0, 1, len(progress)), progress)
                 scores[row["episode_id"]] = np.clip(progress, 0, 1)
     return scores
 
@@ -276,9 +317,10 @@ def select(cache, task, split, drops):
     return cache["embedding"][index], y, metas
 
 
-def episode_metrics(curves, labels, d, s):
+def episode_metrics(curves, labels, d, s, rule="drop", ref=None):
     frames = len(curves[0])
-    flags = [flag_frame(c, d, s) for c in curves]
+    details = [flag_detail(c, d, s, rule, ref) for c in curves]
+    flags = [f for f, _ in details]
     success = [f for f, lab in zip(flags, labels) if lab == 1]
     failure = [f for f, lab in zip(flags, labels) if lab == 0]
     predicted_failure = [0 if f is None else 1 for f in flags]
@@ -286,13 +328,14 @@ def episode_metrics(curves, labels, d, s):
         "false_flags": sum(f is not None for f in success),
         "n_success": len(success),
         "failures_flagged": sum(f is not None for f in failure),
+        "fallback": sum(1 for (f, how), lab in zip(details, labels) if lab == 0 and how == "fallback"),
         "n_failure": len(failure),
         # A failure that is never flagged counts as one past the last frame.
         "median_frame": float(np.median([frames if f is None else f for f in failure])) if failure else float("nan"),
         "median_16": float(np.median([16 if f is None else to_16(f, frames) for f in failure])) if failure else float("nan"),
         "early": sum(f is not None and to_16(f, frames) <= EARLY_16 + 1e-9 for f in failure),
         "episode_f1": f1_score([int(1 - lab) for lab in labels], predicted_failure, zero_division=0),
-    }, flags
+    }, details
 
 
 def baselines(Xtr, ytr, Xte, yte):
@@ -329,7 +372,14 @@ def baselines(Xtr, ytr, Xte, yte):
 
 # ---------- main ----------
 
-def evaluate(train_task, test_task, cache, drops, robometer, seeds, epochs, out_dir, flag_rows, lines):
+def flag_row(test_task, train_task, frames, head, seed, meta, d, s, detail, scores, rule, ref):
+    flag, how = detail
+    return [test_task, train_task, frames, head, seed, meta["episode_id"], meta["label"], d, s,
+            "" if flag is None else flag, " ".join("%.3f" % v for v in scores), rule, how or "",
+            "" if rule == "drop" else " ".join("%.3f" % v for v in ref)]
+
+
+def evaluate(train_task, test_task, cache, drops, robometer, seeds, epochs, out_dir, flag_rows, lines, rule="drop"):
     """Train on train_task's training split and test on test_task's test split.
     For the normal run the two tasks are the same."""
     Xtr, ytr, tr_metas = select(cache, train_task, "train", drops)
@@ -360,56 +410,58 @@ def evaluate(train_task, test_task, cache, drops, robometer, seeds, epochs, out_
     for head, seed in heads:
         fitter = make_fitter(head, seed, epochs)
         cal = crossfit(fitter, Xtr, ytr, tr_metas, folds).numpy()
-        d, s, cal_false = choose_setting(cal[ytr.numpy() == 1], cal[ytr.numpy() == 0], stays)
+        d, s, cal_false = choose_setting(cal[ytr.numpy() == 1], cal[ytr.numpy() == 0], stays, rule)
+        # The behind rule compares test attempts with the average held-out training-success score.
+        ref = success_reference(cal[ytr.numpy() == 1])[0]
         test_scores = fitter(Xtr, ytr, tr_metas)(Xte).numpy()
-        metrics, flags = episode_metrics(test_scores, yte.numpy(), d, s)
+        metrics, details = episode_metrics(test_scores, yte.numpy(), d, s, rule, ref)
         metrics.update({"d": d, "s": s, "cal_false": cal_false})
         results[head].append(metrics)
         if seed == 0:
             curves[head] = test_scores
-        for meta, flag, sc in zip(te_metas, flags, test_scores):
-            flag_rows.append([test_task, train_task, frames, head, seed, meta["episode_id"], meta["label"], d, s,
-                              "" if flag is None else flag, " ".join("%.3f" % v for v in sc)])
+        for meta, detail, sc in zip(te_metas, details, test_scores):
+            flag_rows.append(flag_row(test_task, train_task, frames, head, seed, meta, d, s, detail, sc, rule, ref))
         print("  %s %s seed %d: d=%.2f s=%d, median frame %.1f" % (name, head, seed, d, s, metrics["median_frame"]))
 
-    if robometer and frames == 16:
+    if robometer:
         have = [m["episode_id"] in robometer for m in tr_metas + te_metas]
         if all(have):
             rm_tr = np.stack([robometer[m["episode_id"]] for m in tr_metas])
             rm_te = np.stack([robometer[m["episode_id"]] for m in te_metas])
-            d, s, cal_false = choose_setting(rm_tr[ytr.numpy() == 1], rm_tr[ytr.numpy() == 0], stays)
-            metrics, flags = episode_metrics(rm_te, yte.numpy(), d, s)
+            d, s, cal_false = choose_setting(rm_tr[ytr.numpy() == 1], rm_tr[ytr.numpy() == 0], stays, rule)
+            ref = success_reference(rm_tr[ytr.numpy() == 1])[0]
+            metrics, details = episode_metrics(rm_te, yte.numpy(), d, s, rule, ref)
             metrics.update({"d": d, "s": s, "cal_false": cal_false})
             results["Robometer"].append(metrics)
             curves["Robometer"] = rm_te
-            for meta, flag, sc in zip(te_metas, flags, rm_te):
-                flag_rows.append([test_task, train_task, frames, "Robometer", 0, meta["episode_id"], meta["label"], d, s,
-                                  "" if flag is None else flag, " ".join("%.3f" % v for v in sc)])
+            for meta, detail, sc in zip(te_metas, details, rm_te):
+                flag_rows.append(flag_row(test_task, train_task, frames, "Robometer", 0, meta, d, s, detail, sc, rule, ref))
         else:
             lines.append("Robometer scores are missing for %d attempts, so Robometer is skipped." % have.count(False))
-    elif robometer:
-        lines.append("Robometer scored the 16-frame set, so it is left out of this %d-frame run." % frames)
 
     lines.append("")
-    lines.append("Per-frame heads. Counts are on the test attempts, averaged over seeds.")
+    lines.append("Per-frame heads, flagging rule '%s'. Counts are on the test attempts, averaged over seeds." % rule)
     lines.append("'Median frame' is the median flagged frame on test failures (0-%d), counting a failure that" % (frames - 1))
     lines.append("was never flagged as %d. 'Flagged early' means flagged before the last 3 of 16 frames" % frames)
-    lines.append("(in the first 80% of the attempt).")
+    lines.append("(in the first 80% of the attempt). 'From fallback' counts the flagged failures that only")
+    lines.append("the fallback caught (no drop, last score below 0.5).")
     if frames != 16:
         lines.append("'Median, 16-frame scale' puts the median frame where it would fall among 16 frames (0-15).")
     header = ["head", "median frame by seed"]
     if frames != 16:
         header.append("median, 16-frame scale")
-    header += ["false flags", "failures flagged", "flagged early", "setting d, s", "episode F1"]
-    widths = [10, 22] + ([24] if frames != 16 else []) + [14, 17, 17, 16, 10]
+    header += ["false flags", "failures flagged", "from fallback", "flagged early", "setting d, s", "episode F1"]
+    widths = [22, 22] + ([24] if frames != 16 else []) + [14, 17, 14, 17, 16, 10]
     lines.append(" ".join("%-*s" % (w, h) for w, h in zip(widths, header)))
     for head, runs in results.items():
-        cells = [head, " / ".join("%.1f" % r["median_frame"] for r in runs)]
+        label = head if head == "Robometer" else "%s %s" % (head, NAMES[head])
+        cells = [label, " / ".join("%.1f" % r["median_frame"] for r in runs)]
         if frames != 16:
             cells.append(" / ".join("%.1f" % r["median_16"] for r in runs))
         cells += [
             "%.1f of %d" % (np.mean([r["false_flags"] for r in runs]), runs[0]["n_success"]),
             "%.1f of %d" % (np.mean([r["failures_flagged"] for r in runs]), runs[0]["n_failure"]),
+            "%.1f" % np.mean([r["fallback"] for r in runs]),
             "%.1f of %d" % (np.mean([r["early"] for r in runs]), runs[0]["n_failure"]),
             " / ".join("%.2f, %d" % (r["d"], r["s"]) for r in runs),
             "%.2f" % np.mean([r["episode_f1"] for r in runs]),
@@ -438,10 +490,12 @@ def claim_check(results):
     earliest_a = min(avg["A1"], avg["A2"])
     one = avg["B"] <= earliest_a - 2 and avg["B"] <= EARLY_16
     two = not (avg["C"] <= avg["B"] - 2)
-    out = ["First look at the claim (flagged frames on the 16-frame scale, failure start times not used yet):"]
+    out = ["First look at the claim (flagged frames on the 16-frame scale, failure start times not used;"]
+    out.append("the check against the hand-marked failure starts is in check_onsets.py):")
     out.append("  average median frame: A1 %.1f, A2 %.1f, B %.1f, C %.1f   largest spread between seeds: %.1f" % (
         avg["A1"], avg["A2"], avg["B"], avg["C"], spread))
-    out.append("  1. B at least 2 frames earlier than both A1 and A2, and before frame 13: %s" % ("yes" if one else "no"))
+    out.append("  1. B at least 2 frames earlier than both A1 and A2, and before frame 13 (the old cutoff): %s" % (
+        "yes" if one else "no"))
     if one and earliest_a - avg["B"] < spread:
         out.append("     (but the gap is smaller than the spread between seeds, so it counts as a tie)")
     out.append("  2. C not 2 or more frames earlier than B: %s" % ("yes" if two else "no"))
@@ -480,6 +534,8 @@ def main():
     parser.add_argument("--cache", default=None, help="use this cache file instead")
     parser.add_argument("--out", default=None, help="write results here instead")
     parser.add_argument("--keep-unsure", action="store_true", help="keep cup failures marked 'not sure'")
+    parser.add_argument("--rule", choices=RULES, default="drop",
+                        help="flagging rule: drop (original), behind (new), or either")
     args = parser.parse_args()
     torch.set_num_threads(max(1, os.cpu_count() or 1))
 
@@ -492,25 +548,29 @@ def main():
     if args.out:
         out_dir = args.out
     else:
-        folder = "results" + ("_cross" if args.cross else "") + ("" if frames == 16 else "_frames%d" % frames)
+        folder = ("results" + ("" if args.rule == "drop" else "_" + args.rule) + ("_cross" if args.cross else "")
+                  + ("" if frames == 16 else "_frames%d" % frames))
         out_dir = os.path.join(HERE, folder)
     os.makedirs(out_dir, exist_ok=True)
     drops, checked = label_check_drops(args.keep_unsure)
-    robometer = load_robometer()
+    robometer = load_robometer(frames)
 
-    lines = ["Results from week3/run_heads.py (%d frames per attempt%s)" % (
-        frames, ", trained on one task and tested on the other" if args.cross else "")]
+    lines = ["Results from week3/run_heads.py (%d frames per attempt, flagging rule '%s'%s)" % (
+        frames, args.rule, ", trained on one task and tested on the other" if args.cross else "")]
     lines.append("Cup failures checked on the label-check page: %d. Left out: %d." % (checked, len(drops)))
     lines.append("Robometer scores: %s." % ("%d attempts" % len(robometer) if robometer else "not run yet"))
     flag_rows = []
     pairs = [(TASKS[0], TASKS[1]), (TASKS[1], TASKS[0])] if args.cross else [(t, t) for t in TASKS]
     for train_task, test_task in pairs:
-        evaluate(train_task, test_task, cache, drops, robometer, args.seeds, args.epochs, out_dir, flag_rows, lines)
+        evaluate(train_task, test_task, cache, drops, robometer, args.seeds, args.epochs, out_dir, flag_rows, lines,
+                 args.rule)
 
     with open(os.path.join(out_dir, "flags.csv"), "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
+        # how: "rule" or "fallback". reference: the average training-success score at each frame
+        # (used by the behind and either rules).
         writer.writerow(["task", "trained_on", "frames", "head", "seed", "episode_id", "label", "d", "s",
-                         "flagged_frame", "scores"])
+                         "flagged_frame", "scores", "rule", "how", "reference"])
         writer.writerows(flag_rows)
     text = "\n".join(lines)
     with open(os.path.join(out_dir, "results.txt"), "w", encoding="utf-8") as f:

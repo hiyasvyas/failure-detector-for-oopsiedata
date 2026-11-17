@@ -2,19 +2,23 @@
 
 Claas said to start running experiments and send him a status update, so this week is about getting first numbers, not polishing the plan. The write-up comes at the end of the week, once there are results to report.
 
-## What's left (updated Nov 2)
+## What's left (updated Nov 16)
 
-All the code is written. The R3M cache, the heads, the first results, and the cup label check are done (`week3/results/`). What's left is marking failure starts, running Robometer on TACC, and the extra checks below. All commands run from the repo folder in PowerShell.
+The code for the mentor's feedback is written: the new flagging rule (`run_heads.py --rule behind`), grading against the marked failure starts (`check_onsets.py`), and the 8-vs-16-frame Robometer test. All commands run from the repo folder in PowerShell.
 
-1. **Push the branch** so TACC can clone it: `git push -u origin week3-r3m-cache`
+1. ~~Push the branch~~ Done.
 2. ~~Check the 126 cup labels~~ Done: all 126 still look like failures (`week3\label_check\cups_label_check.csv`).
-3. **Mark where 40 failures start** (about 20 minutes each for 2 people):
-   `start week3\onset\mark_onsets.html`, pick Annotator 1 or 2, mark your sheets, press "Download my answers", and move the file into `week3\onset\`. Don't look at each other's answers on the "both" sheets.
-4. **Run Robometer on TACC** (Steps 2 and 3 below). Copy `week3/robometer_scores.jsonl` back to the laptop when it's done.
-5. **Rerun the results** with the label check and Robometer included (about 10 minutes): `py -3.12 week3/run_heads.py`
-6. **Check the failure starts against the heads:** `py -3.12 week3/check_onsets.py`
+3. **Mark where 40 failures start.** Annotator 1 is done (`week3\onset\onset_annotator1.csv`). Annotator 2 uses `week3\share\mark_onsets.zip` (sent privately; the pictures are not in the repo), picks Annotator 2, and sends back `onset_annotator2.csv`, which goes in `week3\onset\`. Each failure now has a success next to it for reference.
+4. **Run Robometer on TACC** (Steps 2 and 3 below). The test job now scores its 8 episodes with both 16 and 8 pictures and runs `week3/tacc/compare_robometer_frames.py`, which says whether 16 pictures are fine. Copy `week3/robometer_scores.jsonl` back to the laptop when the full run is done.
+5. **Rerun the results with the new rule** (about 8 minutes each; Robometer is included once its scores are back):
+   `py -3.12 week3/run_heads.py --rule behind` (writes `week3\results_behind\`), and the same with `--frames 8`, `--frames 32`, and `--cross` for the extra checks.
+6. **Grade against the marked starts and check the claim** (needs both annotators' CSVs):
+   `py -3.12 week3/check_onsets.py --results results_behind` (and `--results results` for the old drop rule). It checks agreement on the 10 shared sheets, then whether Prog+Ranking flags at least 2 frames sooner after the marked start than Prog-Base and Progress-Zero.
+7. **Graphs:** `py -3.12 week3/plot_scores.py --results results_behind`
 
 Steps 3 and 4 don't depend on each other, so different people can do them at the same time.
+
+**The new rule (`--rule behind`):** a failure is flagged once its score stays at least d below the average training-success score at the same frame for s frames in a row, so scores that stop rising get caught, not just scores that drop. The average comes from cross-fitted scores, and d and s are still picked on training attempts only, for about 10% false flags. `--rule either` flags at whichever of the old and new rules fires first. Every results table now also counts how many flags came from the fallback (last score below 0.5).
 
 ### Extra checks (8 frames and cross-task done, 32 frames running)
 

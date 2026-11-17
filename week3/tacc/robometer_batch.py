@@ -6,6 +6,10 @@ Runs on a TACC GPU node inside the Robometer environment, from the repo folder:
 Writes one line per episode to week3/robometer_scores.jsonl. Episodes already in
 that file are skipped, so a job that runs out of time can simply be submitted again.
 The model is loaded once, not once per video like scripts/example_inference_local.py.
+
+--frames 8 gives Robometer 8 evenly spaced pictures instead of 16 (Robometer was trained
+on 8) and writes week3/robometer_scores_8.jsonl. The test job runs both on the same 8
+episodes so week3/tacc/compare_robometer_frames.py can check that 16 is no worse.
 """
 
 import argparse
@@ -75,10 +79,15 @@ def score(reward_model, tokenizer, collator, exp_config, frames, task, device):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", required=True, help="folder that holds labs/ on TACC, e.g. $WORK/oopsie")
-    parser.add_argument("--out", default=os.path.join(REPO, "week3", "robometer_scores.jsonl"))
+    parser.add_argument("--out", default=None,
+                        help="default week3/robometer_scores.jsonl (16 frames) or robometer_scores_<N>.jsonl")
     parser.add_argument("--model", default="robometer/Robometer-4B")
     parser.add_argument("--limit", type=int, default=0, help="test run: N successes and N failures per task")
+    parser.add_argument("--frames", type=int, default=16, help="pictures per episode given to Robometer")
     args = parser.parse_args()
+    if args.out is None:
+        name = "robometer_scores.jsonl" if args.frames == 16 else "robometer_scores_%d.jsonl" % args.frames
+        args.out = os.path.join(REPO, "week3", name)
 
     with open(os.path.join(REPO, "week2", "episode_index.csv"), encoding="utf-8") as f:
         rows = pick_rows(list(csv.DictReader(f)), args.limit)
@@ -104,7 +113,7 @@ def main():
     with open(args.out, "a", encoding="utf-8") as out:
         for number, row in enumerate(rows, start=1):
             t1 = time.time()
-            episode = load_episode(tacc_path(row["h5_path"], args.data), row["task"])
+            episode = load_episode(tacc_path(row["h5_path"], args.data), row["task"], args.frames)
             progress, success = score(
                 reward_model, tokenizer, collator, exp_config, episode["frames"], episode["instruction"], device
             )
