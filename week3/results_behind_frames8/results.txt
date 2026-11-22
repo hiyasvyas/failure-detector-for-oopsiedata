@@ -1,6 +1,6 @@
 Results from week3/run_heads.py (8 frames per attempt, flagging rule 'behind')
 Cup failures checked on the label-check page: 126. Left out: 0.
-Robometer scores: not run yet.
+Robometer scores: 400 attempts.
 
 ====================================================================================================
 open_oven   train: 34 successes, 66 failures   test: 18 successes, 82 failures
@@ -18,6 +18,7 @@ A2 Progress-Zero       3.0 / 1.0 / 3.0        6.4 / 2.1 / 6.4          16.7 of 1
 B Prog+Ranking         4.0 / 5.0 / 4.0        8.6 / 10.7 / 8.6         13.0 of 18     72.0 of 82        3.0            51.7 of 82        0.20, 2 / 0.20, 2 / 0.20, 2 0.86      
 C Prog+Rank+Label      2.5 / 2.0 / 2.0        5.4 / 4.3 / 4.3          16.0 of 18     79.3 of 82        3.3            69.7 of 82        0.20, 2 / 0.20, 2 / 0.20, 2 0.89      
 D Distance-Baseline    5.0                    10.7                     14.0 of 18     52.0 of 82        1.0            43.0 of 82        0.20, 2          0.70      
+Robometer              7.0                    15.0                     2.0 of 18      61.0 of 82        39.0           4.0 of 82         0.20, 2          0.84      
 
 Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
   most common label                        accuracy 0.82   episode F1 0.90   failures caught 82 of 82   successes called failures 18 of 18
@@ -46,6 +47,7 @@ A2 Progress-Zero       6.5 / 6.0 / 7.0        13.9 / 12.9 / 15.0       4.7 of 18
 B Prog+Ranking         4.0 / 3.0 / 6.0        8.6 / 6.4 / 12.9         2.3 of 18      27.0 of 30        2.3            16.7 of 30        0.10, 2 / 0.10, 2 / 0.20, 2 0.91      
 C Prog+Rank+Label      5.0 / 6.0 / 6.0        10.7 / 12.9 / 12.9       2.7 of 18      27.3 of 30        4.0            16.0 of 30        0.20, 2 / 0.20, 2 / 0.20, 2 0.91      
 D Distance-Baseline    7.0                    15.0                     0.0 of 18      20.0 of 30        7.0            9.0 of 30         0.20, 2          0.80      
+Robometer              7.0                    15.0                     2.0 of 18      17.0 of 30        0.0            5.0 of 30         0.20, 1          0.69      
 
 Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
   most common label                        accuracy 0.62   episode F1 0.77   failures caught 30 of 30   successes called failures 18 of 18

@@ -1,51 +1,59 @@
-Results from week3/run_heads.py
-Cup failures checked on the label-check page: 0. Left out: 0.
-Robometer scores: not run yet.
+Results from week3/run_heads.py (16 frames per attempt, flagging rule 'drop')
+Cup failures checked on the label-check page: 126. Left out: 0.
+Robometer scores: 400 attempts.
 
 ====================================================================================================
 open_oven   train: 34 successes, 66 failures   test: 18 successes, 82 failures
 Left out after the label check: 0.   Success/failure pairs for ranking (Heads B, C): 22.
 
-Per-frame heads. Counts are on the test attempts, averaged over seeds.
+Per-frame heads, flagging rule 'drop'. Counts are on the test attempts, averaged over seeds.
 'Median frame' is the median flagged frame on test failures (0-15), counting a failure that
-was never flagged as 16. 'Before frame 13' means flagged before the last 3 frames.
-head       median frame by seed   false flags    failures flagged  before frame 13   setting d, s     episode F1
-A1         16.0 / 16.0 / 16.0     1.7 of 18      19.7 of 82        6.0 of 82         0.20, 2 / 0.20, 4 / 0.10, 4 0.37      
-A2         15.0 / 15.0 / 15.0     9.3 of 18      78.0 of 82        9.0 of 82         0.20, 3 / 0.20, 4 / 0.20, 4 0.92      
-B          15.5 / 15.0 / 16.0     3.3 of 18      43.3 of 82        6.0 of 82         0.20, 4 / 0.20, 3 / 0.20, 4 0.67      
-C          15.0 / 15.0 / 15.0     8.0 of 18      66.0 of 82        16.3 of 82        0.20, 3 / 0.20, 4 / 0.20, 4 0.85      
-D          15.0                   11.0 of 18     46.0 of 82        26.0 of 82        0.20, 4          0.66      
+was never flagged as 16. 'Flagged early' means flagged before the last 3 of 16 frames
+(in the first 80% of the attempt). 'From fallback' counts the flagged failures that only
+the fallback caught (no drop, last score below 0.5).
+head                   median frame by seed   false flags    failures flagged  from fallback  flagged early     setting d, s     episode F1
+A1 Prog-Base           16.0 / 16.0 / 16.0     1.7 of 18      19.7 of 82        9.3            6.0 of 82         0.20, 2 / 0.20, 4 / 0.10, 4 0.37      
+A2 Progress-Zero       15.0 / 15.0 / 15.0     9.3 of 18      78.0 of 82        63.0           9.0 of 82         0.20, 3 / 0.20, 4 / 0.20, 4 0.92      
+B Prog+Ranking         15.5 / 15.0 / 16.0     3.3 of 18      43.3 of 82        30.0           6.0 of 82         0.20, 4 / 0.20, 3 / 0.20, 4 0.67      
+C Prog+Rank+Label      15.0 / 15.0 / 15.0     8.0 of 18      66.0 of 82        42.0           16.3 of 82        0.20, 3 / 0.20, 4 / 0.20, 4 0.85      
+D Distance-Baseline    15.0                   11.0 of 18     46.0 of 82        10.0           26.0 of 82        0.20, 4          0.66      
+Robometer              16.0                   2.0 of 18      40.0 of 82        25.0           11.0 of 82        0.10, 2          0.65      
 
 Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
   most common label                        accuracy 0.82   episode F1 0.90   failures caught 82 of 82   successes called failures 18 of 18
   logistic regression, mean of 16 frames   accuracy 0.39   episode F1 0.44   failures caught 24 of 82   successes called failures 3 of 18
   logistic regression, all 16 frames       accuracy 0.75   episode F1 0.83   failures caught 60 of 82   successes called failures 3 of 18
 
-First look at the claim (flagged frames only, failure start times not used yet):
+First look at the claim (flagged frames on the 16-frame scale, failure start times not used;
+the check against the hand-marked failure starts is in check_onsets.py):
   average median frame: A1 16.0, A2 15.0, B 15.5, C 15.0   largest spread between seeds: 1.0
-  1. B at least 2 frames earlier than both A1 and A2, and before frame 13: no
+  1. B at least 2 frames earlier than both A1 and A2, and before frame 13 (the old cutoff): no
   2. C not 2 or more frames earlier than B: yes
 
 ====================================================================================================
 stack_cups   train: 56 successes, 96 failures   test: 18 successes, 30 failures
 Left out after the label check: 0.   Success/failure pairs for ranking (Heads B, C): 355.
 
-Per-frame heads. Counts are on the test attempts, averaged over seeds.
+Per-frame heads, flagging rule 'drop'. Counts are on the test attempts, averaged over seeds.
 'Median frame' is the median flagged frame on test failures (0-15), counting a failure that
-was never flagged as 16. 'Before frame 13' means flagged before the last 3 frames.
-head       median frame by seed   false flags    failures flagged  before frame 13   setting d, s     episode F1
-A1         5.0 / 4.5 / 5.0        0.0 of 18      24.0 of 30        20.7 of 30        0.10, 4 / 0.20, 3 / 0.10, 4 0.89      
-A2         15.0 / 15.0 / 15.0     6.0 of 18      23.3 of 30        8.7 of 30         0.20, 4 / 0.20, 4 / 0.20, 4 0.79      
-B          13.0 / 15.0 / 15.0     2.3 of 18      21.0 of 30        6.7 of 30         0.05, 4 / 0.20, 3 / 0.10, 4 0.79      
-C          14.5 / 15.0 / 14.0     3.0 of 18      26.0 of 30        10.3 of 30        0.20, 4 / 0.20, 4 / 0.20, 4 0.88      
-D          15.0                   1.0 of 18      16.0 of 30        6.0 of 30         0.20, 4          0.68      
+was never flagged as 16. 'Flagged early' means flagged before the last 3 of 16 frames
+(in the first 80% of the attempt). 'From fallback' counts the flagged failures that only
+the fallback caught (no drop, last score below 0.5).
+head                   median frame by seed   false flags    failures flagged  from fallback  flagged early     setting d, s     episode F1
+A1 Prog-Base           5.0 / 4.5 / 5.0        0.0 of 18      24.0 of 30        3.0            20.7 of 30        0.10, 4 / 0.20, 3 / 0.10, 4 0.89      
+A2 Progress-Zero       15.0 / 15.0 / 15.0     6.0 of 18      23.3 of 30        12.7           8.7 of 30         0.20, 4 / 0.20, 4 / 0.20, 4 0.79      
+B Prog+Ranking         13.0 / 15.0 / 15.0     2.3 of 18      21.0 of 30        11.3           6.7 of 30         0.05, 4 / 0.20, 3 / 0.10, 4 0.79      
+C Prog+Rank+Label      14.5 / 15.0 / 14.0     3.0 of 18      26.0 of 30        9.0            10.3 of 30        0.20, 4 / 0.20, 4 / 0.20, 4 0.88      
+D Distance-Baseline    15.0                   1.0 of 18      16.0 of 30        5.0            6.0 of 30         0.20, 4          0.68      
+Robometer              16.0                   1.0 of 18      12.0 of 30        7.0            0.0 of 30         0.20, 4          0.56      
 
 Episode-level baselines (whole attempt only, no frame). Episode F1 treats failure as the positive class.
   most common label                        accuracy 0.62   episode F1 0.77   failures caught 30 of 30   successes called failures 18 of 18
   logistic regression, mean of 16 frames   accuracy 0.92   episode F1 0.93   failures caught 27 of 30   successes called failures 1 of 18
   logistic regression, all 16 frames       accuracy 0.96   episode F1 0.97   failures caught 30 of 30   successes called failures 2 of 18
 
-First look at the claim (flagged frames only, failure start times not used yet):
+First look at the claim (flagged frames on the 16-frame scale, failure start times not used;
+the check against the hand-marked failure starts is in check_onsets.py):
   average median frame: A1 4.8, A2 15.0, B 14.3, C 14.5   largest spread between seeds: 2.0
-  1. B at least 2 frames earlier than both A1 and A2, and before frame 13: no
+  1. B at least 2 frames earlier than both A1 and A2, and before frame 13 (the old cutoff): no
   2. C not 2 or more frames earlier than B: yes

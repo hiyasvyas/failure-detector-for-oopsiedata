@@ -1,0 +1,47 @@
+Hand-marked failure starts
+
+Sheets both annotators marked:
+  open_oven  20260803_211025                                              annotator 1: none  annotator 2: none  agree (no clear moment)
+  open_oven  20260803_211049                                              annotator 1: none  annotator 2: none  agree (no clear moment)
+  open_oven  20260803_210436                                              annotator 1: none  annotator 2: 2     DISAGREE
+  open_oven  20260803_210822                                              annotator 1: 2     annotator 2: 2     agree (0 frames apart)
+  open_oven  20260803_211239                                              annotator 1: 4     annotator 2: 3     agree (1 frames apart)
+  stack_cups bsp-stack-unstack-bspline-1-2-20260125t013609145795-fail-c1e annotator 1: 14    annotator 2: 14    agree (0 frames apart)
+  stack_cups bsp-speeding-stack-pack-cups-20260120t010452861135-fail-2f41 annotator 1: 12    annotator 2: 9     DISAGREE
+  stack_cups bsp-stack-unstack-bspline-1-2-20260125t014404678408-fail-4da annotator 1: 11    annotator 2: 11    agree (0 frames apart)
+  stack_cups bsp-stack-unstack-bspline-1-2-20260124t051121248179-fail-b03 annotator 1: 11    annotator 2: 7     DISAGREE
+  stack_cups bsp-stack-unstack-bspline-1-2-20260124t050307648485-fail-c19 annotator 1: 11    annotator 2: 10    agree (1 frames apart)
+Disagreements: 3 of 10 (not marked by both: 0).
+3 or fewer disagreements, so the hand marks can be used.
+
+Attempts with a marked start: 33. Marked 'no clear moment': 7. Not marked: 0.
+
+Flagged frame against the marked start, test failures only, averaged over seeds
+(results_behind, flagging rule 'behind').
+task        head                 marked   too early   at or after     frames after the start   missed  
+open_oven   A1 Prog-Base         14       0.0         3.0             9.0                      11.0    
+open_oven   A2 Progress-Zero     14       3.7         10.0            5.0                      0.3     
+open_oven   B Prog+Ranking       14       1.0         6.3             6.0                      6.7     
+open_oven   C Prog+Rank+Label    14       4.0         8.0             10.0                     2.0     
+open_oven   D Distance-Baseline  14       3.0         6.0             1.0                      5.0     
+open_oven   Robometer Robometer  14       1.0         6.0             6.5                      7.0     
+stack_cups  A1 Prog-Base         19       10.3        3.3             3.0                      5.3     
+stack_cups  A2 Progress-Zero     19       3.0         10.0            3.0                      6.0     
+stack_cups  B Prog+Ranking       19       7.3         8.0             3.0                      3.7     
+stack_cups  C Prog+Rank+Label    19       4.3         10.3            1.0                      4.3     
+stack_cups  D Distance-Baseline  19       0.0         8.0             2.0                      11.0    
+stack_cups  Robometer Robometer  19       5.0         4.0             0.5                      10.0    
+('frames after the start' is the median over the failures flagged at or after the start.)
+
+The claim, with the marked starts in place of the 'before the last 3 frames' cutoff.
+Delay = flagged frame - marked start; flagged too early or never flagged = 16 - marked start.
+open_oven
+  median delay (frames after the marked start, averaged over seeds): Prog-Base 10.3, Progress-Zero 3.7, Prog+Ranking 7.5, Prog+Rank+Label 9.5   largest spread between seeds: 3.0
+  1. Prog+Ranking at least 2 frames sooner than both Prog-Base and Progress-Zero: no
+  2. Prog+Rank+Label not 2 or more frames sooner than Prog+Ranking: yes
+  The claim does not hold on this task.
+stack_cups
+  median delay (frames after the marked start, averaged over seeds): Prog-Base 3.7, Progress-Zero 4.0, Prog+Ranking 2.0, Prog+Rank+Label 2.0   largest spread between seeds: 1.0
+  1. Prog+Ranking at least 2 frames sooner than both Prog-Base and Progress-Zero: no
+  2. Prog+Rank+Label not 2 or more frames sooner than Prog+Ranking: yes
+  The claim does not hold on this task.
