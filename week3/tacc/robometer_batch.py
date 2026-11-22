@@ -64,7 +64,10 @@ def score(reward_model, tokenizer, collator, exp_config, frames, task, device):
     num_bins = getattr(loss_config, "progress_discrete_bins", None) or getattr(
         exp_config.model, "progress_discrete_bins", 10
     )
-    with torch.no_grad():
+    # Robometer was trained with bf16 autocast. Without it, Unsloth leaves part of the model in
+    # float32 and the first layer fails with "expected mat1 and mat2 to have the same dtype".
+    with torch.no_grad(), torch.autocast(device_type=device.type, dtype=torch.bfloat16,
+                                         enabled=device.type == "cuda"):
         results = compute_batch_outputs(
             reward_model, tokenizer, inputs, sample_type="progress", is_discrete_mode=is_discrete, num_bins=num_bins
         )
